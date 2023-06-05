@@ -56,7 +56,8 @@ private:
 	Application() {}
 
 public:
-	static Application &Instance(){
+	static Application &Instance()
+	{
 		static Application Instance;
 		return Instance;
 	}
