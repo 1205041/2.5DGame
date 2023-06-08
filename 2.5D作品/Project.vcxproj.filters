@@ -97,6 +97,9 @@
     <Filter Include="Src\Application\Scene\TitleScene">
       <UniqueIdentifier>{429f916f-97db-4b3e-b35e-b923bd177b0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Scene\SceneBase">
+      <UniqueIdentifier>{cfb665ba-eda6-4daf-8b4b-34ed63196628}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -246,6 +249,12 @@
     <ClInclude Include="Src\Application\Scene\ResultScene\ResultScene.h">
       <Filter>Src\Application\Scene\ResultScene</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Scene\SceneBase\SceneBase.h">
+      <Filter>Src\Application\Scene\SceneBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Scene\SceneManager.h">
+      <Filter>Src\Application\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -373,6 +382,12 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Scene\ResultScene\ResultScene.cpp">
       <Filter>Src\Application\Scene\ResultScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\SceneBase\SceneBase.cpp">
+      <Filter>Src\Application\Scene\SceneBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\SceneManager.cpp">
+      <Filter>Src\Application\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
