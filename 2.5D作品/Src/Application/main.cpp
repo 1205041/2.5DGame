@@ -1,4 +1,5 @@
 ﻿#include "main.h"
+#include "Scene/GameScene/GameScene.h"
 
 // エントリーポイント
 // アプリケーションはこの関数から進行する
@@ -34,14 +35,15 @@ void Application::PreUpdate()
 {
 	// 入力状況の更新
 	KdInputManager::Instance().Update();
-
 	KdShaderManager::Instance().WorkAmbientController().PreUpdate();
+
+	m_gameScene->PreUpdate();
 }
 
 // アプリケーション更新
 void Application::Update()
 {
-	
+	m_gameScene->Update();
 }
 
 // アプリケーション更新の後処理
@@ -50,55 +52,23 @@ void Application::PostUpdate()
 	// 3DSoundListnerの行列を更新
 	KdAudioManager::Instance().SetListnerMatrix(KdShaderManager::Instance().GetCameraCB().mView.Invert());
 
+	m_gameScene->PostUpdate();
 }
 
 // アプリケーション描画の前処理
 void Application::PreDraw()
 {
 	KdDirect3D::Instance().ClearBackBuffer();
-
 	KdShaderManager::Instance().WorkAmbientController().PreDraw();
-
 	KdShaderManager::Instance().m_postProcessShader.PreDraw();
+
+	m_gameScene->PreDraw();
 }
 
 // アプリケーション描画
 void Application::Draw()
 {
-	// ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
-	// 光を遮るオブジェクト(不透明な物体や2Dキャラ)はBeginとEndの間にまとめてDrawする
-	KdShaderManager::Instance().m_HD2DShader.BeginGenerateDepthMapFromLight();
-	{
-
-	}
-	KdShaderManager::Instance().m_HD2DShader.EndGenerateDepthMapFromLight();
-
-
-	// ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
-	// 陰影のあるオブジェクト(不透明な物体や2Dキャラ)はBeginとEndの間にまとめてDrawする
-	KdShaderManager::Instance().m_HD2DShader.BeginLit();
-	{
-		
-	}
-	KdShaderManager::Instance().m_HD2DShader.EndLit();
-
-
-	// ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
-	// 陰影のないオブジェクト(透明な部分を含む物体やエフェクト)はBeginとEndの間にまとめてDrawする
-	KdShaderManager::Instance().m_HD2DShader.BeginUnLit();
-	{
-
-	}
-	KdShaderManager::Instance().m_HD2DShader.EndUnLit();
-
-
-	// ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
-	// 光源オブジェクト(自ら光るオブジェクトやエフェクト)はBeginとEndの間にまとめてDrawする
-	KdShaderManager::Instance().m_postProcessShader.BeginBright();
-	{
-
-	}
-	KdShaderManager::Instance().m_postProcessShader.EndBright();
+	m_gameScene->Draw();
 }
 
 // アプリケーション描画の後処理
@@ -106,18 +76,14 @@ void Application::PostDraw()
 {
 	// 画面のぼかしや被写界深度処理の実施
 	KdShaderManager::Instance().m_postProcessShader.PostEffectProcess();
+
+	m_gameScene->DrawDebug();
 }
 
 // 2Dスプライトの描画
 void Application::DrawSprite()
 {
-	// ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
-	// 2Dの描画はこの間で行う
-	KdShaderManager::Instance().m_spriteShader.Begin();
-	{
-
-	}
-	KdShaderManager::Instance().m_spriteShader.End();
+	m_gameScene->DrawSprite();
 }
 
 // アプリケーション初期設定
@@ -164,6 +130,8 @@ bool Application::Init(int w, int h)
 	//===================================================================
 	KdShaderManager::Instance().Init();
 	KdAudioManager::Instance().Init();
+
+	m_gameScene = std::make_shared<GameScene>();
 
 	return true;
 }
