@@ -46,7 +46,7 @@ private:
 	~SceneManager() {}
 
 public:
-	static SceneManager& Instacne()
+	static SceneManager& Instance()
 	{
 		static SceneManager instance;
 		return instance;
