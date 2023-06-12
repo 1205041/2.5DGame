@@ -26,9 +26,9 @@ void SceneBase::PostUpdate()
 
 void SceneBase::PreDraw()
 {
-	if (!m_camera)return;
+	if (!m_upCamera)return;
 
-	m_camera->SetToShader();// 更新
+	m_upCamera->SetToShader();// 更新
 }
 
 void SceneBase::Draw()

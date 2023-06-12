@@ -6,11 +6,11 @@ public:
 	CameraBase() { Init(); }
 	~CameraBase() {}
 
-	void Init()   override;
-	void Update() override;
-	void PreDraw()override;
+	virtual void Init()   override;
+	virtual void Update() override;
+	virtual void PreDraw()override;
 
-	void SetTarget(const std::shared_ptr<KdGameObject>& target);
+	void SetTaret(const std::shared_ptr<KdGameObject>& _target);
 
 	std::shared_ptr<const KdCamera> WorkCamera() const { return m_spCamera; }
 
