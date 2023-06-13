@@ -61,9 +61,6 @@
     <Filter Include="Src\Application\Object">
       <UniqueIdentifier>{33b67e6b-7858-41d7-9222-c681cedc0ba8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Object\Camera">
-      <UniqueIdentifier>{83d19168-02e3-4d99-b941-47822c8d1164}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Src\Application\Object\Character">
       <UniqueIdentifier>{c3c9e2be-84fd-431c-b35c-34e3c0945f5c}</UniqueIdentifier>
     </Filter>
@@ -75,15 +72,6 @@
     </Filter>
     <Filter Include="Src\Application\Object\Character\Enemy">
       <UniqueIdentifier>{2f6c2a94-6e8a-4492-894d-f27cafc2a10a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Src\Application\Object\Camera\FPS">
-      <UniqueIdentifier>{9e0b82c6-1204-4fcd-9f9c-1c0b3f1ed59d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Src\Application\Object\Camera\TPS">
-      <UniqueIdentifier>{6e95d78c-053b-4716-9735-de5d00e23916}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Src\Application\Object\Camera\Tracking">
-      <UniqueIdentifier>{2a298953-860a-4750-880c-e73efe949320}</UniqueIdentifier>
     </Filter>
     <Filter Include="Src\Application\Scene">
       <UniqueIdentifier>{c94d588d-d22e-4168-9ff2-013877bf529b}</UniqueIdentifier>
@@ -228,18 +216,6 @@
     <ClInclude Include="Src\Application\Object\Character\Enemy\Enemy.h">
       <Filter>Src\Application\Object\Character\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\Camera\CameraBase.h">
-      <Filter>Src\Application\Object\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Application\Object\Camera\FPS\FPS.h">
-      <Filter>Src\Application\Object\Camera\FPS</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Application\Object\Camera\TPS\TPS.h">
-      <Filter>Src\Application\Object\Camera\TPS</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Application\Object\Camera\Tracking\Tracking.h">
-      <Filter>Src\Application\Object\Camera\Tracking</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Application\Scene\GameScene\GameScene.h">
       <Filter>Src\Application\Scene\GameScene</Filter>
     </ClInclude>
@@ -361,18 +337,6 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Character\Enemy\Enemy.cpp">
       <Filter>Src\Application\Object\Character\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Application\Object\Camera\CameraBase.cpp">
-      <Filter>Src\Application\Object\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Application\Object\Camera\FPS\FPS.cpp">
-      <Filter>Src\Application\Object\Camera\FPS</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Application\Object\Camera\TPS\TPS.cpp">
-      <Filter>Src\Application\Object\Camera\TPS</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Application\Object\Camera\Tracking\Tracking.cpp">
-      <Filter>Src\Application\Object\Camera\Tracking</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Scene\GameScene\GameScene.cpp">
       <Filter>Src\Application\Scene\GameScene</Filter>
