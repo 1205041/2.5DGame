@@ -1,8 +1,11 @@
 #include "GameScene.h"
 
 #include "../../Object/Player/Player.h"
-#include "../../Object/Ground/Ground.h"
 #include "../../Object/Enemy/Enemy.h"
+
+#include "../../Object/Ground/Ground.h"
+//#include "../../Object/Scaffold/Scaffold.h"
+//#include "../../Object/SkySphere/SkySphere.h"
 
 void GameScene::Update()
 {
@@ -37,10 +40,10 @@ void GameScene::Draw()
 	// 陰影のあるオブジェクト(不透明な物体や2Dキャラ)はBeginとEndの間にまとめてDrawする
 	KdShaderManager::Instance().m_HD2DShader.BeginLit();
 	{
-		m_ground->Draw();
-
 		m_enemy->Draw();
 		m_player->Draw();
+
+		m_ground->Draw();
 	}
 	KdShaderManager::Instance().m_HD2DShader.EndLit();
 
@@ -72,12 +75,10 @@ void GameScene::Init()
 	// キャラ
 	// 実体化→コンストラクタが自動的に動く
 	m_player = std::make_shared<Player>();
-//	m_player->Init();
-
+	m_player->SetGameScene(this);
 	m_enemy = std::make_shared<Enemy>();
-//	m_enemy->Init();
+	m_enemy->SetGameScene(this);
 
 	// 地形
 	m_ground = std::make_shared<Ground>();
-//	m_ground->Init();
 }

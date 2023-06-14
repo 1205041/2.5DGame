@@ -1,20 +1,21 @@
 #pragma once
 
-class Ground
+class SkySphere
 {
 public:
-	Ground() { Init(); }
-	~Ground() {}
+	SkySphere() { Init(); }
+	~SkySphere() {};
 
 	void Draw();
 	void Init();
 
 	const KdCollider& GetCollidr() { return m_collider; }
-	Math::Matrix GetMat() { return m_mat; }
+	const Math::Matrix& GetMat() { return m_mat; }
 
 private:
 	std::shared_ptr<KdModelWork> m_model;
-	Math::Matrix	m_mat;
+	Math::Matrix m_mat;
 
+	// “–‚½‚è”»’è—p
 	KdCollider m_collider;
 };

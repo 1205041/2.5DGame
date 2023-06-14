@@ -1,17 +1,13 @@
-#include "Ground.h"
+#include "SkySphere.h"
 
-void Ground::Draw()
+void SkySphere::Draw()
 {
-	// 板ポリ(地面)
-	KdShaderManager::Instance().m_HD2DShader.DrawModel(*m_model, m_mat);
-
 }
 
-void Ground::Init()
+void SkySphere::Init()
 {
-	//	板ポリ(地面)初期化
 	m_model = std::make_shared<KdModelWork>();
-	m_model->SetModelData(KdAssets::Instance().m_modeldatas.GetData("Asset/Models/Stage/Stage.gltf"));
+	m_model->SetModelData(KdAssets::Instance().m_modeldatas.GetData("Asset/Models/SkySphere/"));
 
 	// 拡縮行列
 	Math::Matrix scaleMat;
@@ -27,4 +23,3 @@ void Ground::Init()
 	// 当たり判定用
 	m_collider.RegisterCollisionShape("StageModel", m_model, KdCollider::TypeGround);
 }
-

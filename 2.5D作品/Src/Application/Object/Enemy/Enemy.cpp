@@ -2,6 +2,10 @@
 
 void Enemy::Update()
 {
+	// デバック用
+	m_debugWire.AddDebugSphere
+	(m_pos + Math::Vector3(0, 0.5f, 0), 0.2f, { 0,1,0,1 });
+
 	// アニメーション
 	int Walk[4] = { 3,4,3,5 };
 	m_poly.SetUVRect(Walk[(int)m_anime]);
@@ -31,4 +35,8 @@ void Enemy::Init()
 	// 画像分割
 	m_poly.SetSplit(6, 6);
 	m_anime = 0;
+}
+
+void Enemy::DrawDebug()
+{
 }

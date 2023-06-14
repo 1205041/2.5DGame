@@ -70,3 +70,6 @@
 
 // FPSコントローラー
 #include "Utility/KdFPSController.h"
+
+// デバックライン表示
+#include "Utility/KdDebugWireFrame.h"

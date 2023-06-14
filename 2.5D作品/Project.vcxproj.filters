@@ -76,6 +76,21 @@
     <Filter Include="Src\Application\Object\Enemy">
       <UniqueIdentifier>{0fc52844-5f30-491a-9549-12a674e92db7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Scene\ResultScene">
+      <UniqueIdentifier>{84a845a7-41d0-418a-bed2-c238be9f810c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Scene\TitleScene">
+      <UniqueIdentifier>{80889057-4731-419b-90e2-da431945ef9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Scene\SceneBase">
+      <UniqueIdentifier>{29036415-941f-4931-8cf0-3ca9680fe9c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\SkySphere">
+      <UniqueIdentifier>{c2dbc98b-e5ff-4612-997f-cf0e87e7facb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Scaffold">
+      <UniqueIdentifier>{2ad6ca9a-cb30-4db0-869a-77f424074f04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -204,14 +219,29 @@
     <ClInclude Include="Src\Application\Scene\GameScene\GameScene.h">
       <Filter>Src\Application\Scene\GameScene</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\BaseObject.h">
-      <Filter>Src\Application\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Application\Object\Player\Player.h">
       <Filter>Src\Application\Object\Player</Filter>
     </ClInclude>
     <ClInclude Include="Src\Application\Object\Enemy\Enemy.h">
       <Filter>Src\Application\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Scene\SceneBase\SceneBase.h">
+      <Filter>Src\Application\Scene\SceneBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Scene\ResultScene\ResultScene.h">
+      <Filter>Src\Application\Scene\ResultScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Scene\TitleScene\TitleScene.h">
+      <Filter>Src\Application\Scene\TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Scene\SceneManager.h">
+      <Filter>Src\Application\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Scaffold\Scaffold.h">
+      <Filter>Src\Application\Object\Scaffold</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\SkySphere\SkySphere.h">
+      <Filter>Src\Application\Object\SkySphere</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -320,14 +350,29 @@
     <ClCompile Include="Src\Application\Scene\GameScene\GameScene.cpp">
       <Filter>Src\Application\Scene\GameScene</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Object\BaseObject.cpp">
-      <Filter>Src\Application\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Application\Object\Player\Player.cpp">
       <Filter>Src\Application\Object\Player</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Enemy\Enemy.cpp">
       <Filter>Src\Application\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\SceneBase\SceneBase.cpp">
+      <Filter>Src\Application\Scene\SceneBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\ResultScene\ResultScene.cpp">
+      <Filter>Src\Application\Scene\ResultScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\TitleScene\TittleScene.cpp">
+      <Filter>Src\Application\Scene\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\SceneManager.cpp">
+      <Filter>Src\Application\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Scaffold\Scaffold.cpp">
+      <Filter>Src\Application\Object\Scaffold</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\SkySphere\SkySphere.cpp">
+      <Filter>Src\Application\Object\SkySphere</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
