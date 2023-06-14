@@ -27,13 +27,10 @@ public:
 
 	// それぞれの状況で描画する関数
 	virtual void GenerateDepthMapFromLight() {}
-	virtual void PreDraw() {}
 	virtual void DrawLit() {}
 	virtual void DrawUnLit() {}
 	virtual void DrawBright() {}
 	virtual void DrawSprite() {}
-
-	virtual void DrawDebug() {}
 
 	virtual void SetAsset(const std::string&) {}
 

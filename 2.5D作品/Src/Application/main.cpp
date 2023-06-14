@@ -1,5 +1,6 @@
 ﻿#include "main.h"
-#include "Scene/SceneManager.h"
+
+#include "Scene/GameScene/GameScene.h"
 
 // エントリーポイント
 // アプリケーションはこの関数から進行する
@@ -37,13 +38,12 @@ void Application::PreUpdate()
 	KdInputManager::Instance().Update();
 	KdShaderManager::Instance().WorkAmbientController().PreUpdate();
 
-	SceneManager::Instance().PreUpdate();
 }
 
 // アプリケーション更新
 void Application::Update()
 {
-	SceneManager::Instance().Update();
+	m_gameScene->Update();
 }
 
 // アプリケーション更新の後処理
@@ -52,7 +52,6 @@ void Application::PostUpdate()
 	// 3DSoundListnerの行列を更新
 	KdAudioManager::Instance().SetListnerMatrix(KdShaderManager::Instance().GetCameraCB().mView.Invert());
 
-	SceneManager::Instance().PostUpdate();
 }
 
 // アプリケーション描画の前処理
@@ -62,13 +61,13 @@ void Application::PreDraw()
 	KdShaderManager::Instance().WorkAmbientController().PreDraw();
 	KdShaderManager::Instance().m_postProcessShader.PreDraw();
 
-	SceneManager::Instance().PreDraw();
+	m_gameScene->PreDraw();
 }
 
 // アプリケーション描画
 void Application::Draw()
 {
-	SceneManager::Instance().Draw();
+	m_gameScene->Draw();
 }
 
 // アプリケーション描画の後処理
@@ -76,14 +75,18 @@ void Application::PostDraw()
 {
 	// 画面のぼかしや被写界深度処理の実施
 	KdShaderManager::Instance().m_postProcessShader.PostEffectProcess();
-
-	SceneManager::Instance().DrawDebug();
 }
 
 // 2Dスプライトの描画
 void Application::DrawSprite()
 {
-	SceneManager::Instance().DrawSprite();
+	// ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
+	// 2Dの描画はこの間で行う
+	KdShaderManager::Instance().m_spriteShader.Begin();
+	{
+
+	}
+	KdShaderManager::Instance().m_spriteShader.End();
 }
 
 // アプリケーション初期設定
@@ -131,6 +134,11 @@ bool Application::Init(int w, int h)
 	KdShaderManager::Instance().Init();
 	KdAudioManager::Instance().Init();
 
+	// インスタンス化(実体化)
+//	m_gameScene = new GameScene();
+	m_gameScene = std::make_shared<GameScene>();
+//	m_gameScene->Init();
+
 	return true;
 }
 
@@ -176,7 +184,6 @@ void Application::Execute()
 //			if (MessageBoxA(m_window.GetWndHandle(), "本当にゲームを終了しますか？","終了確認", MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2) == IDYES)
 			{End(); }
 		}
-
 		//=========================================
 		// アプリケーション更新処理
 		//=========================================

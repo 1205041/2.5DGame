@@ -59,34 +59,22 @@
       <UniqueIdentifier>{b91bce2d-4487-485a-a855-b2bb6ce0d30b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Src\Application\Object">
-      <UniqueIdentifier>{33b67e6b-7858-41d7-9222-c681cedc0ba8}</UniqueIdentifier>
+      <UniqueIdentifier>{6c2611a5-40f0-4ed0-8e06-fb6666b92109}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Object\Character">
-      <UniqueIdentifier>{c3c9e2be-84fd-431c-b35c-34e3c0945f5c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Src\Application\Object\Terrain">
-      <UniqueIdentifier>{f645d394-ef5b-4a8b-9614-e18e37dc3570}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Src\Application\Object\Character\Player">
-      <UniqueIdentifier>{1bac492d-3c5c-4dcb-862c-a6412a48a686}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Src\Application\Object\Character\Enemy">
-      <UniqueIdentifier>{2f6c2a94-6e8a-4492-894d-f27cafc2a10a}</UniqueIdentifier>
+    <Filter Include="Src\Application\Object\Ground">
+      <UniqueIdentifier>{27f06727-c545-4f19-af94-040420fa0770}</UniqueIdentifier>
     </Filter>
     <Filter Include="Src\Application\Scene">
-      <UniqueIdentifier>{c94d588d-d22e-4168-9ff2-013877bf529b}</UniqueIdentifier>
+      <UniqueIdentifier>{2522f277-54cf-46ba-848f-b1260197eb31}</UniqueIdentifier>
     </Filter>
     <Filter Include="Src\Application\Scene\GameScene">
-      <UniqueIdentifier>{c22e690b-feaa-483f-ba5d-14ec882b3501}</UniqueIdentifier>
+      <UniqueIdentifier>{26420bef-db7f-4e8e-afc9-c8151fb7d06d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Scene\ResultScene">
-      <UniqueIdentifier>{f9b40226-5377-4a6e-9776-5ab33d636ff7}</UniqueIdentifier>
+    <Filter Include="Src\Application\Object\Player">
+      <UniqueIdentifier>{e3b5c6b3-f541-4a49-80a3-c4ffb16e1551}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Scene\TitleScene">
-      <UniqueIdentifier>{429f916f-97db-4b3e-b35e-b923bd177b0a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Src\Application\Scene\SceneBase">
-      <UniqueIdentifier>{cfb665ba-eda6-4daf-8b4b-34ed63196628}</UniqueIdentifier>
+    <Filter Include="Src\Application\Object\Enemy">
+      <UniqueIdentifier>{0fc52844-5f30-491a-9549-12a674e92db7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -210,26 +198,20 @@
     <ClInclude Include="Src\Framework\Utility\KdDebugWireFrame.h">
       <Filter>Src\Framework\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\Character\Player\Player.h">
-      <Filter>Src\Application\Object\Character\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Application\Object\Character\Enemy\Enemy.h">
-      <Filter>Src\Application\Object\Character\Enemy</Filter>
+    <ClInclude Include="Src\Application\Object\Ground\Ground.h">
+      <Filter>Src\Application\Object\Ground</Filter>
     </ClInclude>
     <ClInclude Include="Src\Application\Scene\GameScene\GameScene.h">
       <Filter>Src\Application\Scene\GameScene</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Scene\TitleScene\TitleScene.h">
-      <Filter>Src\Application\Scene\TitleScene</Filter>
+    <ClInclude Include="Src\Application\Object\BaseObject.h">
+      <Filter>Src\Application\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Scene\ResultScene\ResultScene.h">
-      <Filter>Src\Application\Scene\ResultScene</Filter>
+    <ClInclude Include="Src\Application\Object\Player\Player.h">
+      <Filter>Src\Application\Object\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Scene\SceneBase\SceneBase.h">
-      <Filter>Src\Application\Scene\SceneBase</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Application\Scene\SceneManager.h">
-      <Filter>Src\Application\Scene</Filter>
+    <ClInclude Include="Src\Application\Object\Enemy\Enemy.h">
+      <Filter>Src\Application\Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -332,26 +314,20 @@
     <ClCompile Include="Src\Framework\Utility\KdDebugWireFrame.cpp">
       <Filter>Src\Framework\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Object\Character\Player\Player.cpp">
-      <Filter>Src\Application\Object\Character\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Application\Object\Character\Enemy\Enemy.cpp">
-      <Filter>Src\Application\Object\Character\Enemy</Filter>
+    <ClCompile Include="Src\Application\Object\Ground\Ground.cpp">
+      <Filter>Src\Application\Object\Ground</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Scene\GameScene\GameScene.cpp">
       <Filter>Src\Application\Scene\GameScene</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Scene\TitleScene\TitleScene.cpp">
-      <Filter>Src\Application\Scene\TitleScene</Filter>
+    <ClCompile Include="Src\Application\Object\BaseObject.cpp">
+      <Filter>Src\Application\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Scene\ResultScene\ResultScene.cpp">
-      <Filter>Src\Application\Scene\ResultScene</Filter>
+    <ClCompile Include="Src\Application\Object\Player\Player.cpp">
+      <Filter>Src\Application\Object\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Scene\SceneBase\SceneBase.cpp">
-      <Filter>Src\Application\Scene\SceneBase</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Application\Scene\SceneManager.cpp">
-      <Filter>Src\Application\Scene</Filter>
+    <ClCompile Include="Src\Application\Object\Enemy\Enemy.cpp">
+      <Filter>Src\Application\Object\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
