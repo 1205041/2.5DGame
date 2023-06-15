@@ -1,5 +1,7 @@
 #pragma once
 
+class GameScene;
+
 class Enemy
 {
 public:
@@ -21,10 +23,10 @@ private:
 	Math::Vector3	m_pos;
 	Math::Vector3   m_move;
 	Math::Matrix	m_mat;
-	float			m_anime = 0;
+	float			m_anime = 0.0f;
 
 	float		m_gravity = 0.0f;
-	int			m_cnt = 0.0f;
+	int			m_cnt = 0;
 
 	GameScene* m_gameScene;
 	float	maxOverLap = 0.0f;
