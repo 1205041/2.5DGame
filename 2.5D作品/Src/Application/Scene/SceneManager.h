@@ -18,7 +18,7 @@ public:
 	void PostUpdate();
 
 	void PreDraw();
-	void Draw();
+	void DrawLit();
 	void DrawSprite();
 
 	void DrawDebug();

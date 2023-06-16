@@ -38,7 +38,7 @@ void SceneBase::PreDraw()
 	m_camera->SetToShader();
 }
 
-void SceneBase::Draw()
+void SceneBase::DrawLit()
 {
 	// ===== ===== ===== ===== ===== ===== ===== =====
 	// 光を遮るオブジェクト(不透明な物体や2Dキャラ)

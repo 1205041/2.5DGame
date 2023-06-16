@@ -1,20 +1,17 @@
 #pragma once
 
-class Ground
+class Ground :public KdGameObject
 {
 public:
 	Ground() { Init(); }
 	~Ground() {}
 
-	void Draw();
-	void Init();
+	void PostUpdate()				override;
 
-	const KdCollider& GetCollidr() { return m_collider; }
-	Math::Matrix GetMat() { return m_mat; }
+	void GenerateDepthMapFromLight()override;
+	void DrawLit()					override;
 
+	void Init()						override;
 private:
 	std::shared_ptr<KdModelWork> m_model;
-	Math::Matrix	m_mat;
-
-	KdCollider m_collider;
 };

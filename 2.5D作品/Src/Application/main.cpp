@@ -1,7 +1,5 @@
 ﻿#include "main.h"
 
-#include "Scene/GameScene/GameScene.h"
-
 // エントリーポイント
 // アプリケーションはこの関数から進行する
 int WINAPI WinMain(HINSTANCE, HINSTANCE , LPSTR , int )
@@ -38,12 +36,13 @@ void Application::PreUpdate()
 	KdInputManager::Instance().Update();
 	KdShaderManager::Instance().WorkAmbientController().PreUpdate();
 
+	SceneManager::Instance().PreUpdate();
 }
 
 // アプリケーション更新
 void Application::Update()
 {
-	m_gameScene->Update();
+	SceneManager::Instance().Update();
 }
 
 // アプリケーション更新の後処理
@@ -52,6 +51,7 @@ void Application::PostUpdate()
 	// 3DSoundListnerの行列を更新
 	KdAudioManager::Instance().SetListnerMatrix(KdShaderManager::Instance().GetCameraCB().mView.Invert());
 
+	SceneManager::Instance().PostUpdate();
 }
 
 // アプリケーション描画の前処理
@@ -61,13 +61,13 @@ void Application::PreDraw()
 	KdShaderManager::Instance().WorkAmbientController().PreDraw();
 	KdShaderManager::Instance().m_postProcessShader.PreDraw();
 
-	m_gameScene->PreDraw();
+	SceneManager::Instance().PreDraw();
 }
 
 // アプリケーション描画
 void Application::Draw()
 {
-	m_gameScene->Draw();
+	SceneManager::Instance().DrawLit();
 }
 
 // アプリケーション描画の後処理
@@ -75,18 +75,13 @@ void Application::PostDraw()
 {
 	// 画面のぼかしや被写界深度処理の実施
 	KdShaderManager::Instance().m_postProcessShader.PostEffectProcess();
+
+	SceneManager::Instance().DrawDebug();
 }
 
 // 2Dスプライトの描画
 void Application::DrawSprite()
 {
-	// ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
-	// 2Dの描画はこの間で行う
-	KdShaderManager::Instance().m_spriteShader.Begin();
-	{
-
-	}
-	KdShaderManager::Instance().m_spriteShader.End();
 }
 
 // アプリケーション初期設定
@@ -133,11 +128,6 @@ bool Application::Init(int w, int h)
 	//===================================================================
 	KdShaderManager::Instance().Init();
 	KdAudioManager::Instance().Init();
-
-	// インスタンス化(実体化)
-//	m_gameScene = new GameScene();
-	m_gameScene = std::make_shared<GameScene>();
-//	m_gameScene->Init();
 
 	return true;
 }

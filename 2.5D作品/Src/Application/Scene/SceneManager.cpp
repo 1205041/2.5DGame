@@ -31,9 +31,9 @@ void SceneManager::PreDraw()
 	m_curtScene->PreDraw();
 }
 
-void SceneManager::Draw()
+void SceneManager::DrawLit()
 {
-	m_curtScene->Draw();
+	m_curtScene->DrawLit();
 }
 
 void SceneManager::DrawSprite()

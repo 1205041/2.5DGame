@@ -1,35 +1,30 @@
 #pragma once
 
-class GameScene;
-
-class Player
+class Player :public KdGameObject
 {
 public:
 	Player() { Init(); }
 	~Player() {}
 
-	void Update();
-	void Draw();
-	void Init();
+	void Update()					override;
+	void PostUpdate()				override;
 
-	Math::Vector3 GetPos() { return m_pos; }
+	void GenerateDepthMapFromLight()override;
+	void DrawLit()					override;
 
-	void SetGameScene(GameScene* _gameScene) { m_gameScene = _gameScene; }
+	void Init()						override;
 
-	void DrawDebug();
+	void DrawDebug()				override;
 
 private:
 	KdSquarePolygon m_poly;
-	Math::Matrix	m_mat;
 	Math::Vector3	m_pos;
-	float			m_anime = 0;
+	Math::Vector3	m_moveDir;
+	float			m_speed = 0.1f;
+	float			m_anime = 0.0f;
 
 	float			m_gravity = 0.0f;
 	bool			m_jumpFlg = false;
-
-	GameScene*		m_gameScene;
-	float	maxOverLap = 0.0f;
-	bool	hit = false;
 
 	// デバック用
 	KdDebugWireFrame m_debugWire;
