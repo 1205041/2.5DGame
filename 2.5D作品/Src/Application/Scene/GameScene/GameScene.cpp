@@ -18,7 +18,7 @@ void GameScene::Event()
 
 	Math::Matrix transMat = Math::Matrix::Identity;
 	transMat = Math::Matrix::CreateTranslation
-	(Math::Vector3(0, 2.5, -3) + playerPos);
+	(Math::Vector3(0, 2.5f, -3) + playerPos);
 
 	// ƒJƒƒ‰‚Ì‰ñ“]s—ñ
 	Math::Matrix rotMat = Math::Matrix::Identity;

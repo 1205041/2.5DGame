@@ -4,11 +4,11 @@ void Ground::PostUpdate()
 {
 	// Šgks—ñ
 	Math::Matrix scaleMat;
-	scaleMat = Math::Matrix::CreateScale(5.0f, 1.0f, 10.0f);
+	scaleMat = Math::Matrix::CreateScale(0.3f, 0.3f, 0.3f);
 
 	// À•Ws—ñ
 	Math::Matrix transMat;
-	transMat = Math::Matrix::CreateTranslation({ 0,-2,0 });
+	transMat = Math::Matrix::CreateTranslation({ 0,0,0 });
 
 	// s—ñ‡¬(‚r‚q‚s)
 	m_mWorld = scaleMat * transMat;
