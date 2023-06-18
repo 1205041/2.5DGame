@@ -20,12 +20,8 @@
 	],
 	"materials":[
 		{
-			"doubleSided":true,
 			"name":"\u30de\u30c6\u30ea\u30a2\u30eb.001",
 			"pbrMetallicRoughness":{
-				"baseColorTexture":{
-					"index":0
-				},
 				"metallicFactor":0,
 				"roughnessFactor":0.5
 			}
@@ -45,19 +41,6 @@
 					"material":0
 				}
 			]
-		}
-	],
-	"textures":[
-		{
-			"sampler":0,
-			"source":0
-		}
-	],
-	"images":[
-		{
-			"mimeType":"image/png",
-			"name":"Doujyou.png",
-			"uri":"../../../../../../../../../BlenderFile/2.5DModels/SkySphere/%E9%81%93%E5%A0%B4/Doujyou.png"
 		}
 	],
 	"accessors":[
@@ -120,12 +103,6 @@
 			"byteLength":11520,
 			"byteOffset":35296,
 			"target":34963
-		}
-	],
-	"samplers":[
-		{
-			"magFilter":9729,
-			"minFilter":9987
 		}
 	],
 	"buffers":[

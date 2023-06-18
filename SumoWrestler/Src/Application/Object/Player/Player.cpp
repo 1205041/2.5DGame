@@ -1,8 +1,5 @@
 #include "Player.h"
 
-#include "../../Scene/GameScene/GameScene.h"
-#include "../Ground/Ground.h"
-
 void Player::Update()
 {
 	// キャラのアニメーション

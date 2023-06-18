@@ -17,13 +17,11 @@ void GameScene::Event()
 	}
 
 	Math::Matrix transMat = Math::Matrix::Identity;
-	transMat = Math::Matrix::CreateTranslation
-	(Math::Vector3(0, 2.5f, -3) + playerPos);
+	transMat = Math::Matrix::CreateTranslation(Math::Vector3(0, 2.5f, -3) + playerPos);
 
 	// ƒJƒƒ‰‚Ì‰ñ“]s—ñ
 	Math::Matrix rotMat = Math::Matrix::Identity;
-	rotMat = Math::Matrix::CreateRotationX
-	(DirectX::XMConvertToRadians(30));
+	rotMat = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(30));
 
 	// s—ñ‡¬(Šgk(S) * ‰ñ“](R) * À•W(T))
 	Math::Matrix mat = rotMat * transMat;

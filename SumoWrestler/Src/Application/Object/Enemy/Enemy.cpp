@@ -6,12 +6,7 @@ void Enemy::Update()
 	if (m_pos.y < -10) { m_isExpired = true; }
 
 	// デバック用
-	m_debugWire.AddDebugSphere
-	(
-		m_pos + Math::Vector3(0, 0.5f, 0), 
-		0.2f, 
-		{ 0,1,0,1 }
-	);
+	m_debugWire.AddDebugSphere(m_pos + Math::Vector3(0, 0.5f, 0), 0.2f, { 0,1,0,1 });
 
 	// アニメーション
 	int Walk[4] = { 3,4,3,5 };
@@ -19,7 +14,8 @@ void Enemy::Update()
 	m_anime += 0.1f;
 	if (m_anime >= 4) { m_anime = 0; }
 
-	m_pos += m_move;
+	m_pos.x += m_move.x;
+	m_pos.y += m_move.y;
 	m_pos.y -= m_gravity;
 	m_gravity += 0.005f;
 
@@ -35,7 +31,7 @@ void Enemy::Update()
 	/* 当たり判定(レイ判定用) */
 	/* ====================== */
 	KdCollider::RayInfo rayInfo;// レイの発射位置を設定
-	rayInfo.m_pos = { 0,-1,0 };	//m_posはキャラの足元のはず！
+	rayInfo.m_pos = m_pos;		//m_posはキャラの足元のはず！
 	rayInfo.m_dir = { 0,-1,0 };	// レイの発射方向を設定
 	rayInfo.m_pos.y += 0.1f;	// 少し高い所から飛ばす
 	// 段差の許容範囲
@@ -96,7 +92,7 @@ void Enemy::Update()
 	KdCollider::SphereInfo sphereInfo;		// 球判定用の変数
 	sphereInfo.m_sphere.Center = m_pos + Math::Vector3(0, 0.5f, 0);		// 球の中心位置を設定
 	sphereInfo.m_sphere.Radius = 0.3f;									// 球の半径を設定
-	sphereInfo.m_type = KdCollider::TypeGround;	 						// 当たり判定をしたいタイプを設定
+	sphereInfo.m_type = KdCollider::TypeGround | KdCollider::TypeBump;	// 当たり判定をしたいタイプを設定
 
 	/* === デバック用(球) === */
 	m_debugWire.AddDebugSphere(sphereInfo.m_sphere.Center, sphereInfo.m_sphere.Radius);
@@ -118,7 +114,7 @@ void Enemy::Update()
 	// 球に当たったリストから一番近いオブジェクトを検出
 	maxOverLap = 0.0f;
 	hit = false;
-	Math::Vector3 hitDir = Math::Vector3::Zero;// 当たっている方向
+	Math::Vector3 hitDir = {};// 当たっている方向
 	for (auto& ret : retSphereList)
 	{
 		// 一番めり込んだオブジェクトを探す
