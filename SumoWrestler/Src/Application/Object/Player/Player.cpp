@@ -1,6 +1,6 @@
 #include "Player.h"
 
-#include "../../Scene/SceneBase/SceneBase.h"
+#include "../Camera/CameraBase.h"
 
 void Player::Update()
 {
@@ -37,7 +37,7 @@ void Player::Update()
 	}
 
 	// ƒJƒƒ‰î•ñ
-	std::shared_ptr<SceneBase> spCamera = m_wpCamera.lock();
+	std::shared_ptr<CameraBase> spCamera = m_wpCamera.lock();
 	if (spCamera)
 	{
 		m_moveVec = m_moveVec.TransformNormal
@@ -60,14 +60,6 @@ void Player::PostUpdate()
 	(DirectX::XMConvertToRadians(m_worldRot.y));
 
 	m_mWorld = rotation * Math::Matrix::CreateTranslation(nowPos);
-}
-
-void Player::GenerateDepthMapFromLight()
-{
-	// ”Âƒ|ƒŠ(‰e)
-	if (!m_spPoly) { return; }
-
-	KdShaderManager::Instance().m_HD2DShader.DrawPolygon(*m_spPoly, m_mWorld);
 }
 
 void Player::DrawLit()

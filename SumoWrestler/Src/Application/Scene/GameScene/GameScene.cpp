@@ -25,7 +25,7 @@ void GameScene::Event()
 
 	
 
-	m_upCamera->SetCameraMatrix(mat);
+//	m_upCamera->SetCameraMatrix(m_mWorld);
 	/* ※ この段階では更新されません ！！ */
 }
 

@@ -10,6 +10,8 @@ void TPS::Init()
 	m_FixMousePos.y = 360;
 
 	SetCursorPos(m_FixMousePos.x, m_FixMousePos.y);
+
+	CameraBase::Init();
 }
 
 void TPS::Update()
@@ -27,10 +29,28 @@ void TPS::Update()
 
 	// 行列合成
 	UpdateRotateByMouse();
-	m_rotMat = GetRotationMatrix();
-	Math::Matrix mat = m_localMat * m_rotMat * targetMat;
+	m_rotation = GetRotationMatrix();
+	m_mWorld = m_localMat * m_rotation * targetMat;
+
+	CameraBase::Update();
 }
 
 void TPS::UpdateRotateByMouse()
 {
+	// マウス位置の差分を得る
+	POINT nowPos;
+	GetCursorPos(&nowPos);
+
+	POINT mouseMove;
+	mouseMove.x = nowPos.x - m_FixMousePos.x;
+	mouseMove.y = nowPos.y - m_FixMousePos.y;
+
+	SetCursorPos(m_FixMousePos.x, m_FixMousePos.y);
+
+	// カメラを回転させる為に各軸の回転角度を設定する
+	m_degAng.x += mouseMove.y * 0.15f;
+	m_degAng.y += mouseMove.x * 0.15f;
+
+	// 回転制御
+	m_degAng.x = std::clamp(m_degAng.x, -FLT_MAX, FLT_MAX);
 }

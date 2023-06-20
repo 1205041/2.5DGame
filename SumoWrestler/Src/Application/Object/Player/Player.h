@@ -1,5 +1,7 @@
 #pragma once
 
+class CameraBase;
+
 class Player :public KdGameObject
 {
 public:
@@ -9,14 +11,12 @@ public:
 	void Update()					override;
 	void PostUpdate()				override;
 
-	void GenerateDepthMapFromLight()override;
 	void DrawLit()					override;
-
 	void Init()						override;
 
 	void DrawDebug()				override;
 
-	void SetCamera(const std::shared_ptr<SceneBase>& _camera) { m_wpCamera = _camera; }
+	void SetCamera(const std::shared_ptr<CameraBase>& _camera) { m_wpCamera = _camera; }
 	void RegistHitObj(const std::shared_ptr<KdGameObject>& _obj) { m_wpHitObjList.push_back(_obj); }
 
 private:
@@ -26,7 +26,7 @@ private:
 	void UpdateCollision();
 
 	std::shared_ptr<KdSquarePolygon>			m_spPoly = nullptr;
-	std::weak_ptr<SceneBase>					m_wpCamera;
+	std::weak_ptr<CameraBase>					m_wpCamera;
 
 	std::vector<std::weak_ptr<KdGameObject>>	m_wpHitObjList;
 

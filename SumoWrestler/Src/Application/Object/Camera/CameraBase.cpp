@@ -4,7 +4,7 @@ void CameraBase::Init()
 {
 	if (!m_spCamera) { m_spCamera = std::make_shared<KdCamera>(); }
 
-	m_DegAng = Math::Vector3::Zero;
+	m_degAng = Math::Vector3::Zero;
 }
 
 void CameraBase::Update()
