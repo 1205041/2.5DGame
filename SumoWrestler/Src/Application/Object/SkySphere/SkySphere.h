@@ -8,7 +8,6 @@ public:
 
 	void PostUpdate()				 override;
 	
-	void GenerateDepthMapFromLight() override;
 	void DrawLit()					 override;
 	
 	void Init()						 override;

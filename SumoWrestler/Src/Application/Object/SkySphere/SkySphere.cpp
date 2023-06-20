@@ -4,7 +4,7 @@ void SkySphere::PostUpdate()
 {
 	// Šgks—ñ
 	Math::Matrix scaleMat;
-	scaleMat = Math::Matrix::CreateScale(10.0f, 10.0f, 10.0f);
+	scaleMat = Math::Matrix::CreateScale(20.0f, 20.0f, 20.0f);
 
 	// À•Ws—ñ
 	Math::Matrix transMat;
@@ -12,10 +12,6 @@ void SkySphere::PostUpdate()
 
 	// s—ñ‡¬(‚r‚q‚s)
 	m_mWorld = scaleMat * transMat;
-}
-
-void SkySphere::GenerateDepthMapFromLight()
-{
 }
 
 void SkySphere::DrawLit()

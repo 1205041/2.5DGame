@@ -88,9 +88,6 @@
     <Filter Include="Src\Application\Object\SkySphere">
       <UniqueIdentifier>{c2dbc98b-e5ff-4612-997f-cf0e87e7facb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Object\Scaffold">
-      <UniqueIdentifier>{2ad6ca9a-cb30-4db0-869a-77f424074f04}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -237,9 +234,6 @@
     <ClInclude Include="Src\Application\Scene\SceneManager.h">
       <Filter>Src\Application\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\Scaffold\Scaffold.h">
-      <Filter>Src\Application\Object\Scaffold</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Application\Object\SkySphere\SkySphere.h">
       <Filter>Src\Application\Object\SkySphere</Filter>
     </ClInclude>
@@ -362,14 +356,11 @@
     <ClCompile Include="Src\Application\Scene\ResultScene\ResultScene.cpp">
       <Filter>Src\Application\Scene\ResultScene</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Scene\TitleScene\TittleScene.cpp">
+    <ClCompile Include="Src\Application\Scene\TitleScene\TitleScene.cpp">
       <Filter>Src\Application\Scene\TitleScene</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Scene\SceneManager.cpp">
       <Filter>Src\Application\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Application\Object\Scaffold\Scaffold.cpp">
-      <Filter>Src\Application\Object\Scaffold</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Object\SkySphere\SkySphere.cpp">
       <Filter>Src\Application\Object\SkySphere</Filter>

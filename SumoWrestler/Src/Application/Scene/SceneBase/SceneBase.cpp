@@ -7,14 +7,8 @@ void SceneBase::PreUpdate()
 	while (it != m_objList.end())
 	{
 		// 期限切れ
-		if ((*it)->IsExpired())
-		{
-			it = m_objList.erase(it);
-		}
-		else
-		{
-			++it;
-		}
+		if ((*it)->IsExpired()) { it = m_objList.erase(it); }
+		else { ++it; }
 	}
 }
 
@@ -32,10 +26,10 @@ void SceneBase::PostUpdate()
 
 void SceneBase::PreDraw()
 {
-	if (!m_camera)return;
+	if (!m_upCamera) { return; }
 
 	// カメラ更新
-	m_camera->SetToShader();
+	m_upCamera->SetToShader();
 }
 
 void SceneBase::DrawLit()
@@ -104,4 +98,28 @@ void SceneBase::DrawSprite()
 		for (auto& obj : m_objList) { obj->DrawSprite(); }
 	}
 	KdShaderManager::Instance().m_spriteShader.End();
+}
+
+void SceneBase::SetTarget(const std::shared_ptr<KdGameObject>& _target)
+{
+	if (!_target) { return; }
+
+	m_wpTarget = _target;
+}
+
+void SceneBase::UpdateRotateByMouse()
+{
+	// マウス位置の差分を得る
+	POINT nowPos;
+	GetCursorPos(&nowPos);
+
+	POINT mouseMove;
+	mouseMove.x = nowPos.x - m_FixMousePos.x;
+	mouseMove.y = nowPos.y - m_FixMousePos.y;
+
+	SetCursorPos(m_FixMousePos.x, m_FixMousePos.y);
+
+	// カメラを回転させる為に各軸の回転角度を設定する
+	m_degAng.x += mouseMove.y * 0.15f;
+	m_degAng.y += mouseMove.x * 0.15f;
 }

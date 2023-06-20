@@ -148,7 +148,6 @@
     <ClInclude Include="Src\Application\Object\Enemy\Enemy.h" />
     <ClInclude Include="Src\Application\Object\Ground\Ground.h" />
     <ClInclude Include="Src\Application\Object\Player\Player.h" />
-    <ClInclude Include="Src\Application\Object\Scaffold\Scaffold.h" />
     <ClInclude Include="Src\Application\Object\SkySphere\SkySphere.h" />
     <ClInclude Include="Src\Application\Scene\GameScene\GameScene.h" />
     <ClInclude Include="Src\Application\Scene\ResultScene\ResultScene.h" />
@@ -195,13 +194,12 @@
     <ClCompile Include="Src\Application\Object\Enemy\Enemy.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Ground.cpp" />
     <ClCompile Include="Src\Application\Object\Player\Player.cpp" />
-    <ClCompile Include="Src\Application\Object\Scaffold\Scaffold.cpp" />
     <ClCompile Include="Src\Application\Object\SkySphere\SkySphere.cpp" />
     <ClCompile Include="Src\Application\Scene\GameScene\GameScene.cpp" />
     <ClCompile Include="Src\Application\Scene\ResultScene\ResultScene.cpp" />
     <ClCompile Include="Src\Application\Scene\SceneBase\SceneBase.cpp" />
     <ClCompile Include="Src\Application\Scene\SceneManager.cpp" />
-    <ClCompile Include="Src\Application\Scene\TitleScene\TittleScene.cpp" />
+    <ClCompile Include="Src\Application\Scene\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Src\Framework\Direct3D\KdMaterial.cpp">
       <SubType>
       </SubType>

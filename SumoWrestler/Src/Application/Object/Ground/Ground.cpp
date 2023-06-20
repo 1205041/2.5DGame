@@ -4,7 +4,7 @@ void Ground::PostUpdate()
 {
 	// Šgks—ñ
 	Math::Matrix scaleMat;
-	scaleMat = Math::Matrix::CreateScale(0.3f, 0.3f, 0.3f);
+	scaleMat = Math::Matrix::CreateScale(0.5f, 0.5f, 0.5f);
 
 	// À•Ws—ñ
 	Math::Matrix transMat;
@@ -12,12 +12,6 @@ void Ground::PostUpdate()
 
 	// s—ñ‡¬(‚r‚q‚s)
 	m_mWorld = scaleMat * transMat;
-}
-
-void Ground::GenerateDepthMapFromLight()
-{
-	// ”Âƒ|ƒŠ(‰e)
-	KdShaderManager::Instance().m_HD2DShader.DrawModel(*m_model, m_mWorld);
 }
 
 void Ground::DrawLit()
