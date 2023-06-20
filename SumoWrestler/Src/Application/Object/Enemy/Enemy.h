@@ -19,6 +19,9 @@ public:
 	void SetPos(Math::Vector3 _pos) { m_pos = _pos; }
 	
 private:
+	// Õ“Ë”»’è‚Æ‚»‚ê‚É”º‚¤À•W‚ÌXV
+	void UpdateCollision();
+
 	KdSquarePolygon m_poly;
 	Math::Vector3	m_pos;
 	Math::Vector3   m_move;

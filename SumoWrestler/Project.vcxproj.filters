@@ -88,6 +88,15 @@
     <Filter Include="Src\Application\Object\SkySphere">
       <UniqueIdentifier>{c2dbc98b-e5ff-4612-997f-cf0e87e7facb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Object\Camera">
+      <UniqueIdentifier>{c800615e-3953-4c78-945d-7aaa7184d465}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Camera\TPS">
+      <UniqueIdentifier>{d27fba3a-a20d-43e5-bb9b-d7f4b70293e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Object\Camera\FPS">
+      <UniqueIdentifier>{ba6befb1-de1e-4505-8e54-d32230ef8bab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -237,6 +246,15 @@
     <ClInclude Include="Src\Application\Object\SkySphere\SkySphere.h">
       <Filter>Src\Application\Object\SkySphere</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Application\Object\Camera\CameraBase.h">
+      <Filter>Src\Application\Object\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Camera\FPS\FPS.h">
+      <Filter>Src\Application\Object\Camera\FPS</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Object\Camera\TPS\TPS.h">
+      <Filter>Src\Application\Object\Camera\TPS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pch.cpp">
@@ -364,6 +382,15 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\SkySphere\SkySphere.cpp">
       <Filter>Src\Application\Object\SkySphere</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Camera\CameraBase.cpp">
+      <Filter>Src\Application\Object\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Camera\FPS\FPS.cpp">
+      <Filter>Src\Application\Object\Camera\FPS</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Object\Camera\TPS\TPS.cpp">
+      <Filter>Src\Application\Object\Camera\TPS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

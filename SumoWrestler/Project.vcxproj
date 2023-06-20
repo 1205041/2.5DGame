@@ -145,6 +145,9 @@
     <ClInclude Include="..\Library\tinygltf\stb_image_write.h" />
     <ClInclude Include="..\Library\tinygltf\tiny_gltf.h" />
     <ClInclude Include="Src\Application\main.h" />
+    <ClInclude Include="Src\Application\Object\Camera\CameraBase.h" />
+    <ClInclude Include="Src\Application\Object\Camera\FPS\FPS.h" />
+    <ClInclude Include="Src\Application\Object\Camera\TPS\TPS.h" />
     <ClInclude Include="Src\Application\Object\Enemy\Enemy.h" />
     <ClInclude Include="Src\Application\Object\Ground\Ground.h" />
     <ClInclude Include="Src\Application\Object\Player\Player.h" />
@@ -191,6 +194,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Application\main.cpp" />
+    <ClCompile Include="Src\Application\Object\Camera\CameraBase.cpp" />
+    <ClCompile Include="Src\Application\Object\Camera\FPS\FPS.cpp" />
+    <ClCompile Include="Src\Application\Object\Camera\TPS\TPS.cpp" />
     <ClCompile Include="Src\Application\Object\Enemy\Enemy.cpp" />
     <ClCompile Include="Src\Application\Object\Ground\Ground.cpp" />
     <ClCompile Include="Src\Application\Object\Player\Player.cpp" />

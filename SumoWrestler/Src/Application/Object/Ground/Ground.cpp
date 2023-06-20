@@ -16,6 +16,7 @@ void Ground::PostUpdate()
 
 void Ground::DrawLit()
 {
+	if (!m_model) { return; }
 	// ”Âƒ|ƒŠ(’n–Ê)
 	KdShaderManager::Instance().m_HD2DShader.DrawModel(*m_model, m_mWorld);
 }

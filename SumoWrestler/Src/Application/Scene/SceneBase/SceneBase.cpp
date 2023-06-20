@@ -99,27 +99,3 @@ void SceneBase::DrawSprite()
 	}
 	KdShaderManager::Instance().m_spriteShader.End();
 }
-
-void SceneBase::SetTarget(const std::shared_ptr<KdGameObject>& _target)
-{
-	if (!_target) { return; }
-
-	m_wpTarget = _target;
-}
-
-void SceneBase::UpdateRotateByMouse()
-{
-	// マウス位置の差分を得る
-	POINT nowPos;
-	GetCursorPos(&nowPos);
-
-	POINT mouseMove;
-	mouseMove.x = nowPos.x - m_FixMousePos.x;
-	mouseMove.y = nowPos.y - m_FixMousePos.y;
-
-	SetCursorPos(m_FixMousePos.x, m_FixMousePos.y);
-
-	// カメラを回転させる為に各軸の回転角度を設定する
-	m_degAng.x += mouseMove.y * 0.15f;
-	m_degAng.y += mouseMove.x * 0.15f;
-}

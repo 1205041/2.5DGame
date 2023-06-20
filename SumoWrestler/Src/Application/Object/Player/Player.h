@@ -17,6 +17,7 @@ public:
 	void DrawDebug()				override;
 
 	void SetCamera(const std::shared_ptr<SceneBase>& _camera) { m_wpCamera = _camera; }
+	void RegistHitObj(const std::shared_ptr<KdGameObject>& _obj) { m_wpHitObjList.push_back(_obj); }
 
 private:
 	void UpdateRotate(Math::Vector3& _srcMoveVec);
@@ -24,8 +25,10 @@ private:
 	// è’ìÀîªíËÇ∆ÇªÇÍÇ…î∫Ç§ç¿ïWÇÃçXêV
 	void UpdateCollision();
 
-	std::shared_ptr<KdSquarePolygon> m_spPoly = nullptr;
-	std::weak_ptr<SceneBase>		 m_wpCamera;
+	std::shared_ptr<KdSquarePolygon>			m_spPoly = nullptr;
+	std::weak_ptr<SceneBase>					m_wpCamera;
+
+	std::vector<std::weak_ptr<KdGameObject>>	m_wpHitObjList;
 
 	Math::Vector3	m_moveVec;
 	float			m_anime = 0.0f;

@@ -27,6 +27,50 @@ void Enemy::Update()
 		m_cnt = 0;
 	}
 
+	UpdateCollision();
+}
+
+void Enemy::PostUpdate()
+{
+	Math::Matrix transMat;
+	// キャラの座標行列
+	transMat = Math::Matrix::CreateTranslation(m_pos);
+	m_mWorld = transMat;
+}
+
+void Enemy::GenerateDepthMapFromLight()
+{
+	// 板ポリ(影)
+	KdShaderManager::Instance().m_HD2DShader.DrawPolygon(m_poly, m_mWorld);
+}
+
+void Enemy::DrawLit()
+{
+	// 板ポリ(キャラ)
+	KdShaderManager::Instance().m_HD2DShader.DrawPolygon(m_poly, m_mWorld);
+}
+
+void Enemy::Init()
+{
+	// エネミー初期化
+	m_poly.SetMaterial("Asset/Textures/char.png");
+	m_pos = { 3.0f,0,0 };
+	m_move = Math::Vector3::Zero;
+	m_mWorld = Math::Matrix::Identity;
+
+	// アニメーション
+	m_poly.SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
+	m_poly.SetSplit(6, 6);
+	m_anime = 0;
+}
+
+void Enemy::DrawDebug()
+{
+	m_debugWire.Draw();
+}
+
+void Enemy::UpdateCollision()
+{
 	/* ====================== */
 	/* 当たり判定(レイ判定用) */
 	/* ====================== */
@@ -57,11 +101,7 @@ void Enemy::Update()
 	/* レイと当たり判定をする */
 	for (auto& obj : SceneManager::Instance().GetObjList())
 	{
-		obj->Intersects
-		(
-			rayInfo,	// レイの情報
-			&retRayList	// 当たった情報を格納するリスト
-		);
+		obj->Intersects(rayInfo, &retRayList);
 	}
 
 	// レイに当たったリストから一番近いオブジェクトを検出
@@ -104,11 +144,7 @@ void Enemy::Update()
 
 	for (auto& obj : SceneManager::Instance().GetObjList())
 	{
-		obj->Intersects
-		(
-			sphereInfo,		// 球の情報
-			&retSphereList	// 当たった情報を格納するリスト
-		);
+		obj->Intersects(sphereInfo, &retSphereList);
 	}
 
 	// 球に当たったリストから一番近いオブジェクトを検出
@@ -134,44 +170,4 @@ void Enemy::Update()
 		// 押し返し
 		m_pos += hitDir * maxOverLap;
 	}
-	
-}
-
-void Enemy::PostUpdate()
-{
-	Math::Matrix transMat;
-	// キャラの座標行列
-	transMat = Math::Matrix::CreateTranslation(m_pos);
-	m_mWorld = transMat;
-}
-
-void Enemy::GenerateDepthMapFromLight()
-{
-	// 板ポリ(影)
-	KdShaderManager::Instance().m_HD2DShader.DrawPolygon(m_poly, m_mWorld);
-}
-
-void Enemy::DrawLit()
-{
-	// 板ポリ(キャラ)
-	KdShaderManager::Instance().m_HD2DShader.DrawPolygon(m_poly, m_mWorld);
-}
-
-void Enemy::Init()
-{
-	// エネミー初期化
-	m_poly.SetMaterial("Asset/Textures/char.png");
-	m_pos = { 3.0f,0,0 };
-	m_move = Math::Vector3::Zero;
-	m_mWorld = Math::Matrix::Identity;
-
-	// アニメーション
-	m_poly.SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
-	m_poly.SetSplit(6, 6);
-	m_anime = 0;
-}
-
-void Enemy::DrawDebug()
-{
-	m_debugWire.Draw();
 }
