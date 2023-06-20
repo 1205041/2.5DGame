@@ -29,7 +29,4 @@ protected:
 
 	// オブジェクトリスト
 	std::list<std::shared_ptr<KdGameObject>> m_objList;
-
-	// カメラ変数(回転させない！)
-	std::unique_ptr<KdCamera>			m_upCamera = nullptr;
 };

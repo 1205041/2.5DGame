@@ -26,10 +26,7 @@ void SceneBase::PostUpdate()
 
 void SceneBase::PreDraw()
 {
-	if (!m_upCamera) { return; }
-
-	// ƒJƒƒ‰XV
-	m_upCamera->SetToShader();
+	for (auto& obj : m_objList) { obj->PreDraw(); }
 }
 
 void SceneBase::DrawLit()

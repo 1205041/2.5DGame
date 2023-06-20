@@ -31,8 +31,9 @@ public:
 	}
 
 protected:
-	std::shared_ptr<KdCamera>			m_spCamera = nullptr;
-	std::weak_ptr<KdGameObject>			m_wpTarget;
+	// ƒJƒƒ‰•Ï”(‰ñ“]‚³‚¹‚È‚¢I)
+	std::shared_ptr<KdCamera>	m_spCamera = nullptr;
+	std::weak_ptr<KdGameObject>	m_wpTarget;
 
 	Math::Matrix	m_localMat;
 	Math::Matrix	m_rotation;

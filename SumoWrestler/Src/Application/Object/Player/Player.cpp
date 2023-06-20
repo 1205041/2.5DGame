@@ -15,9 +15,7 @@ void Player::Update()
 	m_mWorld._42 -= m_gravity;
 
 	// キャラクターの移動速度
-	moveSpd = 0.05f;
-	nowPos = GetPos();
-
+	m_nowPos  = GetPos();
 	m_moveVec = Math::Vector3::Zero;
 	if (GetAsyncKeyState('D') & 0x8000) { m_moveVec.x = 1.0f; }
 	if (GetAsyncKeyState('A') & 0x8000) { m_moveVec.x = -1.0f; }
@@ -45,21 +43,21 @@ void Player::Update()
 	}
 
 	m_moveVec.Normalize();
-	m_moveVec *= moveSpd;
+	m_moveVec *= m_moveSpd;
 
-	nowPos.x += m_moveVec.x;
-	nowPos.z += m_moveVec.z;
+	m_nowPos.x += m_moveVec.x;
+	m_nowPos.z += m_moveVec.z;
 
-	UpdateRotate(m_moveVec);
+//	UpdateRotate(m_moveVec);
 	UpdateCollision();
 }
 
 void Player::PostUpdate()
 {
+	// キャラクターのワールド行列を創る処理
 	Math::Matrix rotation = Math::Matrix::CreateRotationY
 	(DirectX::XMConvertToRadians(m_worldRot.y));
-
-	m_mWorld = rotation * Math::Matrix::CreateTranslation(nowPos);
+	m_mWorld = rotation * Math::Matrix::CreateTranslation(m_nowPos);
 }
 
 void Player::DrawLit()
@@ -82,8 +80,10 @@ void Player::Init()
 		m_spPoly->SetSplit(6, 6);
 	}
 
-	m_gravity = 0.0f;
+	m_moveSpd = 0.05f;
+
 	SetPos({ -3.0f,0,0 });
+	m_gravity = 0.0f;
 
 	// アニメーション初期化
 	m_anime = 0.0f;
@@ -168,17 +168,17 @@ void Player::UpdateCollision()
 
 				// ③結果を使って座標を補完する
 				// レイに当たったリストから一番近いオブジェクトを検出
-				float			maxOverLap = 0.0f;
-				Math::Vector3	hitPos = Math::Vector3::Zero;
-				bool			hit = false;
+				float			maxOverLap	= 0.0f;
+				Math::Vector3	hitPos		= Math::Vector3::Zero;
+				bool			hit			= false;
 				for (auto& ret : retRayList)
 				{
 					// レイを遮断しオーバーした長さが一番長いものを探す
 					if (maxOverLap < ret.m_overlapDistance)
 					{
-						maxOverLap = ret.m_overlapDistance;
-						hitPos = ret.m_hitPos;
-						hit = true;
+						maxOverLap	= ret.m_overlapDistance;
+						hitPos		= ret.m_hitPos;
+						hit			= true;
 					}
 				}
 				// 何かしらに当たっている
@@ -187,41 +187,6 @@ void Player::UpdateCollision()
 					SetPos(hitPos);
 					m_gravity = 0;
 				}
-			}
-		}
-	}
-
-	/* ==================== */
-	/* 当たり判定(球判定用) */
-	/* ==================== */
-	// ①当たり判定(球判定)用の情報を作成
-	KdCollider::SphereInfo sphereInfo;
-	sphereInfo.m_sphere.Center = GetPos() + Math::Vector3(0, 0.5f, 0);
-	sphereInfo.m_sphere.Radius = 0.5f;
-
-	sphereInfo.m_type = KdCollider::TypeBump;
-
-	/* === デバック用(球) === */
-	m_debugWire.AddDebugSphere(sphereInfo.m_sphere.Center, sphereInfo.m_sphere.Radius);
-
-	// ②HIT判定対象オブジェクトに総当たり
-	for (std::weak_ptr<KdGameObject>wpGameObj : m_wpHitObjList)
-	{
-		if (!wpGameObj.expired())
-		{
-			std::shared_ptr<KdGameObject> spGameObj = wpGameObj.lock();
-			if (spGameObj)
-			{
-				std::list<KdCollider::CollisionResult> retBumpList;
-				spGameObj->Intersects(sphereInfo, &retBumpList);
-
-				for (auto& ret : retBumpList)
-				{
-					Math::Vector3 newPos =
-						GetPos() + (ret.m_hitDir * ret.m_overlapDistance);
-					SetPos(newPos);
-				}
-				// ③結果を使って座標を補完する
 			}
 		}
 	}

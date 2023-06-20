@@ -8,24 +8,17 @@
 #include "../../Object/Ground/Ground.h"
 #include "../../Object/SkySphere/SkySphere.h"
 
+// カメラ
+#include "../../Object/Camera/TPS/TPS.h"
+
 void GameScene::Event()
 {
-
-	/* ------------------ */
-	/* ここから↓はカメラ */
-	/* ------------------ */
-	if (!m_upCamera) { return; }
-
 	// カメラの座標行列
 	Math::Vector3 playerPos = Math::Vector3::Zero;
 	if (!m_wpPlayer.expired()) 
 	{
 		playerPos = m_wpPlayer.lock()->GetPos();
 	}
-
-	
-
-//	m_upCamera->SetCameraMatrix(m_mWorld);
 	/* ※ この段階では更新されません ！！ */
 }
 
@@ -53,6 +46,8 @@ void GameScene::Init()
 	m_objList.push_back(enemy);
 
 	// カメラの初期化
-	m_upCamera = std::make_unique<KdCamera>();
-	m_upCamera->SetProjectionMatrix(60);
+	std::shared_ptr<TPS> tps = std::make_shared<TPS>();;
+	tps->SetTarget(player);
+	player->SetCamera(tps);
+	m_objList.push_back(tps);
 }
