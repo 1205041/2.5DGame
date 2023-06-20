@@ -11,7 +11,9 @@ public:
 	void Update()					override;
 	void PostUpdate()				override;
 
+	void GenerateDepthMapFromLight()override;
 	void DrawLit()					override;
+
 	void Init()						override;
 
 	void DrawDebug()				override;
@@ -30,8 +32,10 @@ private:
 	std::weak_ptr<CameraBase>					m_wpCamera;
 
 	std::vector<std::weak_ptr<KdGameObject>>	m_wpHitObjList;
-	Math::Vector3								m_nowPos;
-	Math::Vector3								m_moveVec;
+	
+	// キャラクターの移動速度
+	Math::Vector3	m_nowPos;
+	Math::Vector3	m_moveVec;
 	float			m_moveSpd = 0.0f;
 
 	// ワールド行列を作る為のそれぞれの回転角度

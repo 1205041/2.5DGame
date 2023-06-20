@@ -135,13 +135,16 @@ void Enemy::UpdateCollision()
 	sphereInfo.m_type = KdCollider::TypeGround | KdCollider::TypeBump;	// 当たり判定をしたいタイプを設定
 
 	/* === デバック用(球) === */
-	m_debugWire.AddDebugSphere(sphereInfo.m_sphere.Center, sphereInfo.m_sphere.Radius);
+	m_debugWire.AddDebugSphere
+	(
+		sphereInfo.m_sphere.Center, 
+		sphereInfo.m_sphere.Radius
+	);
 
 	// 球に当たったオブジェクト情報を格納するリスト
 	std::list<KdCollider::CollisionResult> retSphereList;
 
 	// 球と当たり判定
-
 	for (auto& obj : SceneManager::Instance().GetObjList())
 	{
 		obj->Intersects(sphereInfo, &retSphereList);

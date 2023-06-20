@@ -13,12 +13,7 @@
 
 void GameScene::Event()
 {
-	// カメラの座標行列
-	Math::Vector3 playerPos = Math::Vector3::Zero;
-	if (!m_wpPlayer.expired()) 
-	{
-		playerPos = m_wpPlayer.lock()->GetPos();
-	}
+	
 	/* ※ この段階では更新されません ！！ */
 }
 
@@ -39,7 +34,6 @@ void GameScene::Init()
 	player = std::make_shared<Player>();
 	player->RegistHitObj(ground);
 	m_objList.push_back(player);
-	m_wpPlayer = player;
 
 	std::shared_ptr<Enemy> enemy;
 	enemy = std::make_shared<Enemy>();
