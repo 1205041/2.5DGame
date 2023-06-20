@@ -35,7 +35,7 @@ void Player::Update()
 		m_jumpFlg = false;
 	}
 
-	// ƒJƒƒ‰‚Ìî•ñ
+	// ƒJƒƒ‰î•ñ
 	std::shared_ptr<SceneBase> spCamera = m_wpCamera.lock();
 	if (spCamera)
 	{
