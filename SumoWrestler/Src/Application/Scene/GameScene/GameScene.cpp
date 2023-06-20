@@ -23,10 +23,6 @@ void GameScene::Event()
 		playerPos = m_wpPlayer.lock()->GetPos();
 	}
 
-	// カメラの位置
-	Math::Matrix transMat = Math::Matrix::Identity;
-	transMat = Math::Matrix::CreateTranslation(Math::Vector3(0, 2.5f, -3) + playerPos);
-
 	// ターゲットの行列
 	Math::Matrix targetMat = Math::Matrix::Identity;
 	if (!m_wpTarget.expired())
@@ -41,7 +37,7 @@ void GameScene::Event()
 	// 行列合成
 	UpdateRotateByMouse();
 	m_rotMat = GetRotationMatrix();
-	Math::Matrix mat = transMat * m_rotMat * targetMat;
+	Math::Matrix mat = m_localMat * m_rotMat * targetMat;
 
 	m_upCamera->SetCameraMatrix(mat);
 	/* ※ この段階では更新されません ！！ */
@@ -68,6 +64,9 @@ void GameScene::Init()
 	std::shared_ptr<SkySphere> skySp;
 	skySp = std::make_shared<SkySphere>();
 	m_objList.push_back(skySp);
+
+	// 基準点(ターゲット)の目線の位置
+	m_localMat = Math::Matrix::CreateTranslation(Math::Vector3(0.0f, 1.f, -10));
 
 	// カーソル初期化
 	m_FixMousePos.x = 640;

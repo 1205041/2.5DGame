@@ -29,6 +29,7 @@ public:
 			DirectX::XMConvertToRadians(m_degAng.z)
 		);
 	}
+	const Math::Matrix GetRotationYMatrix() const { return Math::Matrix::CreateRotationY(DirectX::XMConvertToRadians(m_degAng.y)); }
 
 	/* セッター */
 	void AddObject(const std::shared_ptr<KdGameObject>& _obj) { m_objList.push_back(_obj); }
@@ -47,6 +48,7 @@ protected:
 	std::unique_ptr<KdCamera>			m_upCamera = nullptr;
 	std::weak_ptr<const KdGameObject>	m_wpTarget;
 
+	Math::Matrix	m_localMat	= Math::Matrix::Identity;
 	Math::Matrix	m_rotMat	= Math::Matrix::Identity;
 	Math::Vector3	m_degAng	= Math::Vector3::Zero;
 
