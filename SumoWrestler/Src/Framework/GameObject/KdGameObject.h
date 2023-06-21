@@ -26,12 +26,13 @@ public:
 	virtual void PostUpdate() {}
 
 	// それぞれの状況で描画する関数
-	virtual void GenerateDepthMapFromLight() {}
 	virtual void PreDraw() {}
+	virtual void GenerateDepthMapFromLight() {}
 	virtual void DrawLit() {}
 	virtual void DrawUnLit() {}
 	virtual void DrawBright() {}
 	virtual void DrawSprite() {}
+	virtual void PostDraw() {}
 
 	virtual void DrawDebug() {}
 

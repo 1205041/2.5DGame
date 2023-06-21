@@ -1,6 +1,6 @@
 #include "Player.h"
 
-#include "../Camera/CameraBase.h"
+#include "../Camera/TPS/TPS.h"
 
 void Player::Update()
 {

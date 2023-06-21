@@ -1,5 +1,5 @@
 #pragma once
-#include "../CameraBase.h"
+#include "../CameraBase/CameraBase.h"
 
 class TPS :public CameraBase
 {

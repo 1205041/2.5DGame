@@ -36,7 +36,7 @@ protected:
 	std::weak_ptr<KdGameObject>	m_wpTarget;
 
 	Math::Matrix	m_localMat;
-	Math::Matrix	m_rotation;
+	Math::Matrix	m_rot;
 
 	// ƒJƒƒ‰‰ñ“]—pŠp“x
 	Math::Vector3	m_degAng;

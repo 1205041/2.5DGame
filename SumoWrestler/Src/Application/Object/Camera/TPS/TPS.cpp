@@ -29,8 +29,8 @@ void TPS::Update()
 
 	// çsóÒçáê¨
 	UpdateRotateByMouse();
-	m_rotation = GetRotationMatrix();
-	m_mWorld = m_localMat * m_rotation * targetMat;
+	m_rot = GetRotationMatrix();
+	m_mWorld = m_localMat * m_rot * targetMat;
 
 	CameraBase::Update();
 }

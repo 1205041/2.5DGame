@@ -38,13 +38,9 @@ void Ground::Update()
 			hit = true;
 		}
 	}
-	if (hit)
+	if (!hit)
 	{
-		
-	}
-	else 
-	{
-
+		SceneManager::Instance().SetNextScene(SceneManager::SceneType::Result);
 	}
 }
 
