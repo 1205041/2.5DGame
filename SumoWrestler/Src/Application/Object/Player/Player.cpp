@@ -96,6 +96,9 @@ void Player::Init()
 
 	// アニメーション初期化
 	m_anime = 0.0f;
+
+	m_pCollider = std::make_unique<KdCollider>();
+	m_pCollider->RegisterCollisionShape("PlayerCollider", Math::Vector3(0, -5.0f, 0), 8.0f, KdCollider::TypeBump);
 }
 
 void Player::DrawDebug()

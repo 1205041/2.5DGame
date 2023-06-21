@@ -153,7 +153,7 @@ void Enemy::UpdateCollision()
 	// 球に当たったリストから一番近いオブジェクトを検出
 	maxOverLap = 0.0f;
 	hit = false;
-	Math::Vector3 hitDir = {};// 当たっている方向
+	Math::Vector3 hitDir = Math::Vector3::Zero;// 当たっている方向
 	for (auto& ret : retSphereList)
 	{
 		// 一番めり込んだオブジェクトを探す
@@ -166,10 +166,6 @@ void Enemy::UpdateCollision()
 	}
 	if (hit)
 	{
-		// Zへの押し返し抑止
-		hitDir.z = 0;
-		hitDir.Normalize();
-
 		// 押し返し
 		m_pos += hitDir * maxOverLap;
 	}

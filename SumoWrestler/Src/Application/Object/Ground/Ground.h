@@ -6,11 +6,14 @@ public:
 	Ground() { Init(); }
 	~Ground() {}
 
-	void PostUpdate()				override;
-
-	void DrawLit()					override;
-
-	void Init()						override;
+	void Update()		override;
+	void PostUpdate()	override;
+	void DrawLit()		override;
+	void Init()			override;
+	void DrawDebug()	override;
 private:
 	std::shared_ptr<KdModelWork> m_model;
+
+	// デバック用
+	KdDebugWireFrame m_debugWire;
 };

@@ -14,8 +14,10 @@ void SkySphere::PostUpdate()
 	m_mWorld = scaleMat * transMat;
 }
 
-void SkySphere::DrawLit()
+// 陰影のないオブジェクト(透明な部分を含む物体やエフェクト)
+void SkySphere::DrawUnLit()
 {
+	if (!m_model) { return; }
 	// 板ポリ(地面)
 	KdShaderManager::Instance().m_HD2DShader.DrawModel(*m_model, m_mWorld);
 }
