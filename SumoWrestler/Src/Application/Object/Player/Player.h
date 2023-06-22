@@ -45,6 +45,14 @@ private:
 
 	float			m_anime = 0.0f;
 
+	// 当たり判定用変数
+	const float		enableStepHigh	= 0.2f;
+	float			maxOverLap		= 0.0f;
+	int				notHitCnt		= 0;
+	bool			hit				= false;
+	Math::Vector3	groundPos;
+
+	
 	// デバック用
 	KdDebugWireFrame m_debugWire;
 };

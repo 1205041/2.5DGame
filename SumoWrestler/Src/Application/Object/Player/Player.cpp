@@ -37,8 +37,7 @@ void Player::Update()
 	m_moveVec.Normalize();
 	m_moveVec *= m_moveSpd;
 
-	m_nowPos.x += m_moveVec.x;
-	m_nowPos.z += m_moveVec.z;
+	m_nowPos += m_moveVec;
 
 	// キャラのアニメーション
 	// 24,25,26→24,25,24,26
@@ -56,7 +55,7 @@ void Player::PostUpdate()
 	Math::Matrix rotation = Math::Matrix::CreateRotationY
 	(DirectX::XMConvertToRadians(m_worldRot.y));
 	m_mWorld = rotation * Math::Matrix::CreateTranslation(m_nowPos);
-
+	
 	UpdateCollision();
 }
 
@@ -88,13 +87,15 @@ void Player::Init()
 		m_spPoly->SetSplit(6, 6);
 	}
 
+	SetPos({ -3.0f,-3.0f,0 });
 	m_moveSpd = 0.05f;
-
-	SetPos({ -3.0f,0,0 });
-	m_gravity = 0.0f;
 
 	// アニメーション初期化
 	m_anime = 0.0f;
+
+	// 当たり判定用変数
+	maxOverLap	= 0.0f;
+	hit			= false;
 
 	m_pCollider = std::make_unique<KdCollider>();
 	m_pCollider->RegisterCollisionShape("PlayerCollider", GetPos(), 0.3f, KdCollider::TypeBump);
@@ -146,49 +147,37 @@ void Player::UpdateCollision()
 	/* ====================== */
 	/* 当たり判定(レイ判定用) */
 	/* ====================== */
-	KdCollider::RayInfo rayInfo;// レイの発射位置を設定
-	rayInfo.m_pos = GetPos();	//GetPos()はキャラの足元のはず！
-	rayInfo.m_dir = { 0,-1,0 };	// レイの発射方向を設定
-	rayInfo.m_pos.y += 0.1f;	// 少し高い所から飛ばす
-	// 段差の許容範囲
-	static float enableStepHigh = 0.2f;
-	rayInfo.m_pos.y += enableStepHigh;
+	KdCollider::RayInfo rayInfo;		// レイの発射位置を設定
+	rayInfo.m_pos = GetPos();			//GetPos()はキャラの足元のはず！
+	rayInfo.m_dir = Math::Vector3::Down;// レイの発射方向を設定
+	rayInfo.m_pos.y += 0.1f;			// 少し高い所から飛ばす
 
-	// レイの長さを設定
-	rayInfo.m_range = m_gravity + enableStepHigh;
-	// 当たり判定をしたいタイプを設定
-	rayInfo.m_type = KdCollider::TypeGround;
+	// 段差の許容範囲
+	rayInfo.m_pos.y += enableStepHigh;
+	rayInfo.m_range = m_gravity + enableStepHigh;	// レイの長さを設定
+	rayInfo.m_type = KdCollider::TypeGround;		// 当たり判定をしたいタイプを設定
 
 	/* === デバック用 === */
-	m_debugWire.AddDebugLine
-	(
-		rayInfo.m_pos,
-		rayInfo.m_dir,
-		rayInfo.m_range
-	);
+	m_debugWire.AddDebugLine(rayInfo.m_pos, rayInfo.m_dir, rayInfo.m_range);
 
 	// レイに当たったオブジェクト情報を格納するリスト
 	std::list<KdCollider::CollisionResult> retRayList;
 
 	/* レイと当たり判定をする */
-	for (auto& obj : SceneManager::Instance().GetObjList())
-	{
-		obj->Intersects(rayInfo, &retRayList);
-	}
+	for (auto& obj : SceneManager::Instance().GetObjList()) { obj->Intersects(rayInfo, &retRayList); }
 
 	// レイに当たったリストから一番近いオブジェクトを検出
-	float	maxOverLap = 0.0f;
-	bool	hit = false;
-	Math::Vector3 groundPos = Math::Vector3::Zero;
+	maxOverLap	= 0.0f;
+	hit			= false;
+	groundPos	= Math::Vector3::Zero;
 	for (auto& ret : retRayList)
 	{
-		// レイを遮断してオーバーした長さが
-		// 一番長いものを探す
+		// レイを遮断してオーバーした長さが一番長いものを探す
 		if (maxOverLap < ret.m_overlapDistance)
 		{
-			maxOverLap = ret.m_overlapDistance;
-			groundPos = ret.m_hitPos;
-			hit = true;
+			maxOverLap	= ret.m_overlapDistance;
+			groundPos	= ret.m_hitPos;
+			hit			= true;
 		}
 	}
 	if (hit)
@@ -198,6 +187,14 @@ void Player::UpdateCollision()
 			groundPos + Math::Vector3(0, -0.1f, 0);
 		SetPos(hitPos);
 		m_gravity = 0;
+	}
+	else
+	{
+		notHitCnt++;
+		if (notHitCnt >= 60)
+		{
+			SceneManager::Instance().SetNextScene(SceneManager::SceneType::Result);
+		}
 	}
 
 	/* ==================== */
@@ -209,24 +206,17 @@ void Player::UpdateCollision()
 	sphereInfo.m_type = KdCollider::TypeDamage;		// 当たり判定をしたいタイプを設定
 
 	/* === デバック用(球) === */
-	m_debugWire.AddDebugSphere
-	(
-		sphereInfo.m_sphere.Center,
-		sphereInfo.m_sphere.Radius
-	);
+	m_debugWire.AddDebugSphere(sphereInfo.m_sphere.Center, sphereInfo.m_sphere.Radius);
 
 	// 球に当たったオブジェクト情報を格納するリスト
 	std::list<KdCollider::CollisionResult> retSphereList;
 
 	// 球と当たり判定
-	for (auto& obj : SceneManager::Instance().GetObjList())
-	{
-		obj->Intersects(sphereInfo, &retSphereList);
-	}
+	for (auto& obj : SceneManager::Instance().GetObjList()) { obj->Intersects(sphereInfo, &retSphereList); }
 
 	// 球に当たったリストから一番近いオブジェクトを検出
-	maxOverLap = 0.0f;
-	hit = false;
+	maxOverLap	= 0.0f;
+	hit			= false;
 	Math::Vector3 hitDir = Math::Vector3::Zero;// 当たっている方向
 	for (auto& ret : retSphereList)
 	{

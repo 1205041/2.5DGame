@@ -21,7 +21,7 @@ private:
 	void UpdateCollision();
 
 	KdSquarePolygon m_poly;
-	Math::Vector3   m_move;
+	Math::Vector3   m_moveVec;
 	Math::Vector3	m_nowPos;
 	float			m_anime = 0.0f;
 
@@ -29,8 +29,10 @@ private:
 	int			m_cnt = 0;
 
 	// 当たり判定用変数
-	float	maxOverLap	= 0.0f;
-	bool	hit			= false;
+	const float		enableStepHigh	= 0.2f;
+	float			maxOverLap		= 0.0f;
+	bool			hit				= false;
+	Math::Vector3	groundPos;
 
 	// デバック用
 	KdDebugWireFrame m_debugWire;

@@ -19,8 +19,8 @@ void Enemy::Update()
 	if (m_anime >= 4) { m_anime = 0; }
 
 	m_nowPos = GetPos();
-	m_nowPos.x += m_move.x;
-	m_nowPos.y += m_move.y;
+	m_nowPos.x += m_moveVec.x;
+	m_nowPos.y += m_moveVec.y;
 	m_nowPos.y -= m_gravity;
 	m_gravity += 0.005f;
 
@@ -28,11 +28,9 @@ void Enemy::Update()
 	++m_cnt;
 	if (m_cnt > 120)
 	{
-		m_move.x *= -1;
+		m_moveVec.x *= -1;
 		m_cnt = 0;
 	}
-
-	UpdateCollision();
 }
 
 void Enemy::PostUpdate()
@@ -41,6 +39,8 @@ void Enemy::PostUpdate()
 	// キャラの座標行列
 	transMat = Math::Matrix::CreateTranslation(m_nowPos);
 	m_mWorld = transMat;
+	
+	UpdateCollision();
 }
 
 void Enemy::GenerateDepthMapFromLight()
@@ -60,7 +60,7 @@ void Enemy::Init()
 	// エネミー初期化
 	m_poly.SetMaterial("Asset/Textures/char.png");
 	SetPos({ 3.0f,0,0 });
-	m_move = Math::Vector3::Zero;
+	m_moveVec = Math::Vector3::Zero;
 	m_mWorld = Math::Matrix::Identity;
 
 	// アニメーション
@@ -83,14 +83,13 @@ void Enemy::UpdateCollision()
 	/* ====================== */
 	/* 当たり判定(レイ判定用) */
 	/* ====================== */
-	KdCollider::RayInfo rayInfo;// レイの発射位置を設定
-	rayInfo.m_pos = GetPos();	//GetPos()はキャラの足元のはず！
-	rayInfo.m_dir = { 0,-1,0 };	// レイの発射方向を設定
-	rayInfo.m_pos.y += 0.1f;	// 少し高い所から飛ばす
-	// 段差の許容範囲
-	static float enableStepHigh = 0.2f;
-	rayInfo.m_pos.y += enableStepHigh;
+	KdCollider::RayInfo rayInfo;		// レイの発射位置を設定
+	rayInfo.m_pos = GetPos();			//GetPos()はキャラの足元のはず！
+	rayInfo.m_dir = Math::Vector3::Down;// レイの発射方向を設定
+	rayInfo.m_pos.y += 0.1f;			// 少し高い所から飛ばす
 
+	// 段差の許容範囲
+	rayInfo.m_pos.y += enableStepHigh;
 	rayInfo.m_range = m_gravity + enableStepHigh;	// レイの長さを設定
 	rayInfo.m_type = KdCollider::TypeGround;		// 当たり判定をしたいタイプを設定
 
@@ -106,16 +105,15 @@ void Enemy::UpdateCollision()
 	// レイに当たったリストから一番近いオブジェクトを検出
 	maxOverLap	= 0.0f;
 	hit			= false;
-	Math::Vector3 groundPos = Math::Vector3::Zero;
+	groundPos	= Math::Vector3::Zero;
 	for (auto& ret : retRayList)
 	{
-		// レイを遮断してオーバーした長さが
-		// 一番長いものを探す
+		// レイを遮断してオーバーした長さが一番長いものを探す
 		if (maxOverLap < ret.m_overlapDistance)
 		{
-			maxOverLap = ret.m_overlapDistance;
-			groundPos = ret.m_hitPos;
-			hit = true;
+			maxOverLap	= ret.m_overlapDistance;
+			groundPos	= ret.m_hitPos;
+			hit			= true;
 		}
 	}
 	if (hit)
