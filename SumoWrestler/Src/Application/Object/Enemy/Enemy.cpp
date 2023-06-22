@@ -6,7 +6,7 @@ void Enemy::Update()
 	if (GetPos().y < -10)
 	{ 
 		m_isExpired = true;
-		SceneManager::Instance().SetNextScene(SceneManager::SceneType::Result);
+		SceneManager::Instance().SetNextScene(SceneManager::SceneType::Win);
 	}
 
 	// デバック用

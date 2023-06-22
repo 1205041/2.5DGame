@@ -26,8 +26,8 @@ void WinScene::Init()
 {
 	/* オブジェクトの初期化 */
 	// シーン
-	std::shared_ptr<WinScene> win;
-	win = std::make_shared<WinScene>();
+	std::shared_ptr<WinText> win;
+	win = std::make_shared<WinText>();
 	//win->SetScale({ 1.0f, 1.0f, 1.0f });
 	m_objList.push_back(win);
 

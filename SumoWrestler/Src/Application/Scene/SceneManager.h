@@ -10,7 +10,8 @@ public:
 	{
 		Title,
 		Game,
-		Result,
+		Win,
+		Lose,
 	};
 
 	void PreUpdate();

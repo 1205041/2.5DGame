@@ -26,8 +26,8 @@ void LoseScene::Init()
 {
 	/* オブジェクトの初期化 */
 	// シーン
-	std::shared_ptr<LoseScene> lose;
-	lose = std::make_shared<LoseScene>();
+	std::shared_ptr<LoseText> lose;
+	lose = std::make_shared<LoseText>();
 	//win->SetScale({ 1.0f, 1.0f, 1.0f });
 	m_objList.push_back(lose);
 

@@ -3,7 +3,8 @@
 #include "SceneBase/SceneBase.h"
 #include "TitleScene/TitleScene.h"
 #include "GameScene/GameScene.h"
-#include "ResultScene/ResultScene.h"
+#include "ResultScene/Lose/LoseScene.h"
+#include "ResultScene/Win/WinScene.h"
 
 void SceneManager::PreUpdate()
 {
@@ -73,8 +74,11 @@ void SceneManager::ChangeScene(const SceneType& _sceneType)
 	case SceneType::Game:
 		m_curtScene = new GameScene();
 		break;
-	case SceneType::Result:
-		m_curtScene = new ResultScene();
+	case SceneType::Win:
+		m_curtScene = new WinScene();
+		break;
+	case SceneType::Lose:
+		m_curtScene = new LoseScene();
 		break;
 	}
 	m_curtSceneType = _sceneType;

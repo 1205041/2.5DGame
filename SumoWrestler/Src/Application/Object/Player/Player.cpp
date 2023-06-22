@@ -193,7 +193,7 @@ void Player::UpdateCollision()
 		notHitCnt++;
 		if (notHitCnt >= 60)
 		{
-			SceneManager::Instance().SetNextScene(SceneManager::SceneType::Result);
+			SceneManager::Instance().SetNextScene(SceneManager::SceneType::Lose);
 		}
 	}
 
