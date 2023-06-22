@@ -1,5 +1,5 @@
 #pragma once
-#include "../CameraBase/CameraBase.h"
+#include "../CameraBase.h"
 
 class FPS :public CameraBase
 {

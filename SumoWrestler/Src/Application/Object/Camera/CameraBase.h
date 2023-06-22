@@ -6,9 +6,9 @@ public:
 	CameraBase() { Init(); }
 	~CameraBase() {}
 
-	void Init()		override;
-	void Update()	override;
-	void PreDraw()	override;
+	void Update();
+	void PreDraw();
+	void Init();
 
 	void SetTarget(const std::shared_ptr<KdGameObject>& target);
 
@@ -29,7 +29,6 @@ public:
 		return	Math::Matrix::CreateRotationY(
 			DirectX::XMConvertToRadians(m_degAng.y));
 	}
-
 protected:
 	// ƒJƒƒ‰•Ï”(‰ñ“]‚³‚¹‚È‚¢I)
 	std::shared_ptr<KdCamera>	m_spCamera = nullptr;

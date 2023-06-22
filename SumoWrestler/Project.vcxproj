@@ -145,8 +145,7 @@
     <ClInclude Include="..\Library\tinygltf\stb_image_write.h" />
     <ClInclude Include="..\Library\tinygltf\tiny_gltf.h" />
     <ClInclude Include="Src\Application\main.h" />
-    <ClInclude Include="Src\Application\Object\Camera\CameraBase\CameraBase.h" />
-    <ClInclude Include="Src\Application\Object\Camera\CameraManager.h" />
+    <ClInclude Include="Src\Application\Object\Camera\CameraBase.h" />
     <ClInclude Include="Src\Application\Object\Camera\FPS\FPS.h" />
     <ClInclude Include="Src\Application\Object\Camera\TPS\TPS.h" />
     <ClInclude Include="Src\Application\Object\Camera\Tracking\Tracking.h" />
@@ -199,8 +198,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Application\main.cpp" />
-    <ClCompile Include="Src\Application\Object\Camera\CameraBase\CameraBase.cpp" />
-    <ClCompile Include="Src\Application\Object\Camera\CameraManager.cpp" />
+    <ClCompile Include="Src\Application\Object\Camera\CameraBase.cpp" />
     <ClCompile Include="Src\Application\Object\Camera\FPS\FPS.cpp" />
     <ClCompile Include="Src\Application\Object\Camera\TPS\TPS.cpp" />
     <ClCompile Include="Src\Application\Object\Camera\Tracking\Tracking.cpp" />

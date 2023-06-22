@@ -24,10 +24,9 @@ public:
 	void DrawDebug();
 
 	void Init() { ChangeScene(SceneType::Game); }
-	//	void Release();
 
-		// この関数ではシーン切替がまだ行われない！
-		// あくまで予約！！
+	// この関数ではシーン切替がまだ行われない！
+	// あくまで予約！！
 	void SetNextScene(const SceneType& _nextScene) { m_nextSceneType = _nextScene; }
 
 	// オブジェクトリストを取得

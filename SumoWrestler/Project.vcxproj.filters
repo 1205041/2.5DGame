@@ -112,9 +112,6 @@
     <Filter Include="Src\Application\Object\Camera\Tracking">
       <UniqueIdentifier>{d93b2e60-e30e-416b-921c-303928070519}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Object\Camera\CameraBase">
-      <UniqueIdentifier>{7858bb41-61fb-4b2b-860b-568f989f3a3e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -264,7 +261,7 @@
     <ClInclude Include="Src\Application\Object\SkySphere\SkySphere.h">
       <Filter>Src\Application\Object\SkySphere</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\Camera\CameraManager.h">
+    <ClInclude Include="Src\Application\Object\Camera\CameraBase.h">
       <Filter>Src\Application\Object\Camera</Filter>
     </ClInclude>
     <ClInclude Include="Src\Application\Object\Camera\FPS\FPS.h">
@@ -284,9 +281,6 @@
     </ClInclude>
     <ClInclude Include="Src\Application\Object\Camera\Tracking\Tracking.h">
       <Filter>Src\Application\Object\Camera\Tracking</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Application\Object\Camera\CameraBase\CameraBase.h">
-      <Filter>Src\Application\Object\Camera\CameraBase</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -416,7 +410,7 @@
     <ClCompile Include="Src\Application\Object\SkySphere\SkySphere.cpp">
       <Filter>Src\Application\Object\SkySphere</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Object\Camera\CameraManager.cpp">
+    <ClCompile Include="Src\Application\Object\Camera\CameraBase.cpp">
       <Filter>Src\Application\Object\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Camera\FPS\FPS.cpp">
@@ -436,9 +430,6 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Camera\Tracking\Tracking.cpp">
       <Filter>Src\Application\Object\Camera\Tracking</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Application\Object\Camera\CameraBase\CameraBase.cpp">
-      <Filter>Src\Application\Object\Camera\CameraBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

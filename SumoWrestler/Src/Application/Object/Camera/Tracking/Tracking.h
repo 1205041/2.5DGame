@@ -1,5 +1,5 @@
 #pragma once
-#include "../CameraBase/CameraBase.h"
+#include "../CameraBase.h"
 
 class Tracking : public CameraBase
 {
@@ -7,6 +7,6 @@ public:
 	Tracking() { Init(); }
 	~Tracking() {}
 
-	void Init()					override;
-	void Update()				override;
+	void Init()		override;
+	void Update()	override;
 };
