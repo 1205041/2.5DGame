@@ -23,7 +23,7 @@ public:
 
 	void DrawDebug();
 
-	void Init() { ChangeScene(SceneType::Game); }
+	void Init() { ChangeScene(SceneType::Title); }
 
 	// この関数ではシーン切替がまだ行われない！
 	// あくまで予約！！
@@ -40,7 +40,7 @@ private:
 	SceneBase* m_curtScene = nullptr;
 
 	// 現在のシーンを管理している変数
-	SceneType m_curtSceneType = SceneType::Game;
+	SceneType m_curtSceneType = SceneType::Title;
 
 	// 次のシーンを管理している変数
 	SceneType m_nextSceneType = m_curtSceneType;

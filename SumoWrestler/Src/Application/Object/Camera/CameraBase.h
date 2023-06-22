@@ -15,6 +15,7 @@ public:
 	const std::shared_ptr<KdCamera>& GetCamera() { return m_spCamera; }
 	const std::shared_ptr<KdCamera>& WorkCamera() { return m_spCamera; }
 
+	// m_rotの補正
 	const Math::Matrix GetRotationMatrix() const
 	{
 		return	Math::Matrix::CreateFromYawPitchRoll(
@@ -24,6 +25,7 @@ public:
 		);
 	}
 
+	// プレイヤーのカメラ情報
 	const Math::Matrix GetRotationYMatrix() const
 	{
 		return	Math::Matrix::CreateRotationY(

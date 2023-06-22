@@ -19,7 +19,7 @@ void FPS::Update()
 	Math::Matrix targetMat = Math::Matrix::Identity;
 	if (!m_wpTarget.expired())
 	{
-		std::shared_ptr<const KdGameObject> spTarget = m_wpTarget.lock();
+		const std::shared_ptr<KdGameObject>& spTarget = m_wpTarget.lock();
 		if (spTarget)
 		{
 			targetMat = spTarget->GetMatrix();

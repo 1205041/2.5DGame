@@ -7,12 +7,11 @@
 #include "../../Object/Ground/Ground.h"
 #include "../../Object/SkySphere/SkySphere.h"
 
-// シーン
-#include "../../Object/SceneText/WinScene/WinScene.h"
-#include "../../Object/SceneText/LoseScene/LoseScene.h"
+// タイトルシーン
+
 
 // カメラ
-#include "../../Object/Camera/FPS/FPS.h"
+#include "../../Object/Camera/Tracking/Tracking.h"
 
 void TitleScene::Event()
 {
@@ -25,4 +24,5 @@ void TitleScene::Event()
 
 void TitleScene::Init()
 {
+	ShowCursor(false);
 }

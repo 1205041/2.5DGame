@@ -1,20 +1,19 @@
-#include "ResultScene.h"
+#include "WinScene.h"
 
 // キャラクター
-#include "../../Object/Player/Player.h"
+#include "../../../Object/Player/Player.h"
 
 // 地形
-#include "../../Object/Ground/Ground.h"
-#include "../../Object/SkySphere/SkySphere.h"
+#include "../../../Object/Ground/Ground.h"
+#include "../../../Object/SkySphere/SkySphere.h"
 
 // シーン
-#include "../../Object/SceneText/WinScene/WinScene.h"
-#include "../../Object/SceneText/LoseScene/LoseScene.h"
+#include "../../../Object/SceneText/WinScene/WinText.h"
 
 // カメラ
-#include "../../Object/Camera/FPS/FPS.h"
+#include "../../../Object/Camera/FPS/FPS.h"
 
-void ResultScene::Event()
+void WinScene::Event()
 {
 	// シーン切替(Result→Title)
 	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
@@ -23,7 +22,7 @@ void ResultScene::Event()
 	}
 }
 
-void ResultScene::Init()
+void WinScene::Init()
 {
 	/* オブジェクトの初期化 */
 	// シーン
@@ -31,10 +30,6 @@ void ResultScene::Init()
 	win = std::make_shared<WinScene>();
 	//win->SetScale({ 1.0f, 1.0f, 1.0f });
 	m_objList.push_back(win);
-
-	std::shared_ptr<LoseScene> lose;
-	lose = std::make_shared<LoseScene>();
-	m_objList.push_back(lose);
 
 	// 地形
 	std::shared_ptr<Ground> ground;

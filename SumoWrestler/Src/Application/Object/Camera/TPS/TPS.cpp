@@ -3,7 +3,7 @@
 void TPS::Init()
 {
 	// 基準点(ターゲット)の目線の位置
-	m_localMat = Math::Matrix::CreateTranslation(Math::Vector3(0.0f, 1.0f, -10));
+	m_localMat = Math::Matrix::CreateTranslation(Math::Vector3(0.0f, 1.0f, -5.0f));
 
 	// カーソル初期化
 	m_FixMousePos.x = 640;

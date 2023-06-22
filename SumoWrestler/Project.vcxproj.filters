@@ -112,6 +112,12 @@
     <Filter Include="Src\Application\Object\Camera\Tracking">
       <UniqueIdentifier>{d93b2e60-e30e-416b-921c-303928070519}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Application\Scene\ResultScene\Win">
+      <UniqueIdentifier>{480a0dd2-b502-4c3b-b151-9b9d310e0d34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Application\Scene\ResultScene\Lose">
+      <UniqueIdentifier>{7e6e38d2-1407-4110-9002-7d571095c1d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pch.h">
@@ -249,9 +255,6 @@
     <ClInclude Include="Src\Application\Scene\SceneBase\SceneBase.h">
       <Filter>Src\Application\Scene\SceneBase</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Scene\ResultScene\ResultScene.h">
-      <Filter>Src\Application\Scene\ResultScene</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Application\Scene\TitleScene\TitleScene.h">
       <Filter>Src\Application\Scene\TitleScene</Filter>
     </ClInclude>
@@ -270,17 +273,23 @@
     <ClInclude Include="Src\Application\Object\Camera\TPS\TPS.h">
       <Filter>Src\Application\Object\Camera\TPS</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\SceneText\LoseScene\LoseScene.h">
+    <ClInclude Include="Src\Application\Object\SceneText\LoseScene\LoseText.h">
       <Filter>Src\Application\Object\SceneText\LoseScene</Filter>
     </ClInclude>
     <ClInclude Include="Src\Application\Object\SceneText\TitleScene\TitleText.h">
       <Filter>Src\Application\Object\SceneText\TitleScene</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\SceneText\WinScene\WinScene.h">
+    <ClInclude Include="Src\Application\Object\SceneText\WinScene\WinText.h">
       <Filter>Src\Application\Object\SceneText\WinScene</Filter>
     </ClInclude>
     <ClInclude Include="Src\Application\Object\Camera\Tracking\Tracking.h">
       <Filter>Src\Application\Object\Camera\Tracking</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Scene\ResultScene\Lose\LoseScene.h">
+      <Filter>Src\Application\Scene\ResultScene\Lose</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Application\Scene\ResultScene\Win\WinScene.h">
+      <Filter>Src\Application\Scene\ResultScene\Win</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -398,9 +407,6 @@
     <ClCompile Include="Src\Application\Scene\SceneBase\SceneBase.cpp">
       <Filter>Src\Application\Scene\SceneBase</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Scene\ResultScene\ResultScene.cpp">
-      <Filter>Src\Application\Scene\ResultScene</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Application\Scene\TitleScene\TitleScene.cpp">
       <Filter>Src\Application\Scene\TitleScene</Filter>
     </ClCompile>
@@ -419,17 +425,23 @@
     <ClCompile Include="Src\Application\Object\Camera\TPS\TPS.cpp">
       <Filter>Src\Application\Object\Camera\TPS</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Object\SceneText\LoseScene\LoseScene.cpp">
+    <ClCompile Include="Src\Application\Object\SceneText\LoseScene\LoseText.cpp">
       <Filter>Src\Application\Object\SceneText\LoseScene</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Object\SceneText\TitleScene\TitleText.cpp">
       <Filter>Src\Application\Object\SceneText\TitleScene</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Application\Object\SceneText\WinScene\WinScene.cpp">
+    <ClCompile Include="Src\Application\Object\SceneText\WinScene\WinText.cpp">
       <Filter>Src\Application\Object\SceneText\WinScene</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Camera\Tracking\Tracking.cpp">
       <Filter>Src\Application\Object\Camera\Tracking</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\ResultScene\Lose\LoseScene.cpp">
+      <Filter>Src\Application\Scene\ResultScene\Lose</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Application\Scene\ResultScene\Win\WinScene.cpp">
+      <Filter>Src\Application\Scene\ResultScene\Win</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,11 +1,11 @@
-#include "WinScene.h"
+#include "LoseText.h"
 
-void WinScene::DrawUnLit()
+void LoseText::DrawUnLit()
 {
 	KdShaderManager::Instance().m_HD2DShader.DrawPolygon(m_poly, m_mWorld);
 }
 
-void WinScene::Init()
+void LoseText::Init()
 {
 	m_poly.SetMaterial(KdAssets::Instance().m_textures.GetData("Asset/Textures/win.png"));
 }

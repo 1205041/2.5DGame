@@ -1,10 +1,10 @@
 #pragma once
 
-class WinScene :public KdGameObject
+class LoseText :public KdGameObject
 {
 public:
-	WinScene() { Init(); }
-	~WinScene() {}
+	LoseText() { Init(); }
+	~LoseText() {}
 
 	void DrawUnLit()override;
 	void Init()		override;
