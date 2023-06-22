@@ -11,37 +11,21 @@ void Ground::Update()
 	sphereInfo.m_type = KdCollider::TypeBump;	// 当たり判定をしたいタイプを設定
 
 	/* === デバック用(球) === */
-	m_debugWire.AddDebugSphere
-	(
-		sphereInfo.m_sphere.Center,
-		sphereInfo.m_sphere.Radius
-	);
+	m_debugWire.AddDebugSphere(sphereInfo.m_sphere.Center, sphereInfo.m_sphere.Radius);
 
 	// 球に当たったオブジェクト情報を格納するリスト
 	std::list<KdCollider::CollisionResult> retSphereList;
 
 	// 球と当たり判定
-	for (auto& obj : SceneManager::Instance().GetObjList())
-	{
-		obj->Intersects(sphereInfo, &retSphereList);
-	}
+	for (auto& obj : SceneManager::Instance().GetObjList()) { obj->Intersects(sphereInfo, &retSphereList); }
 
 	// 球に当たったリストから一番近いオブジェクトを検出
-	float	maxOverLap = 0.0f;
-	bool	hit = false;
 	for (auto& ret : retSphereList)
 	{
 		// 一番めり込んだオブジェクトを探す
-		if (maxOverLap < ret.m_overlapDistance)
-		{
-			maxOverLap = ret.m_overlapDistance;
-			hit = true;
-		}
+		if (maxOverLap < ret.m_overlapDistance) { hit = true; }
 	}
-	if (!hit)
-	{
-		SceneManager::Instance().SetNextScene(SceneManager::SceneType::Result);
-	}
+	if (!hit) { SceneManager::Instance().SetNextScene(SceneManager::SceneType::Result); }
 }
 
 void Ground::PostUpdate()
@@ -72,7 +56,10 @@ void Ground::Init()
 	m_model = std::make_shared<KdModelWork>();
 	m_model->SetModelData(KdAssets::Instance().m_modeldatas.GetData("Asset/Models/Stage/Stage.gltf"));
 
-	// 当たり判定用
+	// 当たり判定用変数
+	maxOverLap	= 0.0f;
+	hit			= false;
+
 	m_pCollider = std::make_unique<KdCollider>();
 	m_pCollider->RegisterCollisionShape("StageModel", m_model, KdCollider::TypeGround);
 }

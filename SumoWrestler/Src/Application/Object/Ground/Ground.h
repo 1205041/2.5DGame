@@ -14,6 +14,9 @@ public:
 private:
 	std::shared_ptr<KdModelWork> m_model;
 
+	float	maxOverLap	= 0.0f;
+	bool	hit			= false;
+
 	// デバック用
 	KdDebugWireFrame m_debugWire;
 };

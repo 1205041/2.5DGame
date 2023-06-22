@@ -41,7 +41,7 @@ private:
 	// ワールド行列を作る為のそれぞれの回転角度
 	Math::Vector3	m_worldRot;
 	float			m_gravity = 0.0f;
-	bool			m_jumpFlg = false;
+	bool			m_pushFlg = false;
 
 	float			m_anime = 0.0f;
 

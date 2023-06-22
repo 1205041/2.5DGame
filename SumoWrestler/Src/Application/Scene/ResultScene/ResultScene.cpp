@@ -29,7 +29,7 @@ void ResultScene::Init()
 	// ÉVÅ[Éì
 	std::shared_ptr<WinScene> win;
 	win = std::make_shared<WinScene>();
-	win->SetScale({ 1.0f, 1.0f, 1.0f });
+	//win->SetScale({ 1.0f, 1.0f, 1.0f });
 	m_objList.push_back(win);
 
 	std::shared_ptr<LoseScene> lose;
