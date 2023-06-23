@@ -21,9 +21,9 @@ void CameraBase::PreDraw()
 	m_spCamera->SetToShader();
 }
 
-void CameraBase::SetTarget(const std::shared_ptr<KdGameObject>& target)
+void CameraBase::SetTarget(const std::shared_ptr<KdGameObject>& _target)
 {
-	if (!target) { return; }
+	if (!_target) { return; }
 
-	m_wpTarget = target;
+	m_wpTarget = _target;
 }

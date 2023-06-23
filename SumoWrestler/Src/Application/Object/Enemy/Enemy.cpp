@@ -3,20 +3,10 @@
 void Enemy::Update()
 {
 	// 期限切れを有効にする
-	if (GetPos().y < -10)
-	{ 
-		m_isExpired = true;
-		SceneManager::Instance().SetNextScene(SceneManager::SceneType::Win);
-	}
+	if (GetPos().y < -10) { m_isExpired = true; }
 
 	// デバック用
 	m_debugWire.AddDebugSphere(GetPos() + Math::Vector3(0, 0.5f, 0), 0.2f, { 0,1,0,1 });
-
-	// アニメーション
-	int Walk[4] = { 3,4,3,5 };
-	m_poly.SetUVRect(Walk[(int)m_anime]);
-	m_anime += 0.1f;
-	if (m_anime >= 4) { m_anime = 0; }
 
 	m_nowPos = GetPos();
 	m_nowPos.x += m_moveVec.x;
@@ -31,6 +21,12 @@ void Enemy::Update()
 		m_moveVec.x *= -1;
 		m_cnt = 0;
 	}
+
+	// アニメーション
+	int Walk[4] = { 3,4,3,5 };
+	m_spPoly->SetUVRect(Walk[(int)m_anime]);
+	m_anime += 0.1f;
+	if (m_anime >= 4) { m_anime = 0; }
 }
 
 void Enemy::PostUpdate()
@@ -46,36 +42,40 @@ void Enemy::PostUpdate()
 void Enemy::GenerateDepthMapFromLight()
 {
 	// 板ポリ(影)
-	KdShaderManager::Instance().m_HD2DShader.DrawPolygon(m_poly, m_mWorld);
+	if (!m_spPoly) { return; }
+
+	KdShaderManager::Instance().m_HD2DShader.DrawPolygon(*m_spPoly, m_mWorld);
 }
 
 void Enemy::DrawLit()
 {
 	// 板ポリ(キャラ)
-	KdShaderManager::Instance().m_HD2DShader.DrawPolygon(m_poly, m_mWorld);
+	if (!m_spPoly) { return; }
+
+	KdShaderManager::Instance().m_HD2DShader.DrawPolygon(*m_spPoly, m_mWorld);
 }
 
 void Enemy::Init()
 {
 	// エネミー初期化
-	m_poly.SetMaterial("Asset/Textures/char.png");
+	if (!m_spPoly)
+	{
+		m_spPoly = std::make_shared<KdSquarePolygon>();
+		m_spPoly->SetMaterial(KdAssets::Instance().m_textures.GetData("Asset/Textures/Player/char.png"));
+
+		// アニメーション
+		m_spPoly->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
+		m_spPoly->SetSplit(6, 6);
+	}
+	m_anime = 0;
+
 	SetPos({ 3.0f,0,0 });
 	m_moveVec = Math::Vector3::Zero;
 	m_mWorld = Math::Matrix::Identity;
 
-	// アニメーション
-	m_poly.SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
-	m_poly.SetSplit(6, 6);
-	m_anime = 0;
-
 	// 当たり判定用変数初期化
 	maxOverLap	= 0.0f;
 	hit			= false;
-}
-
-void Enemy::DrawDebug()
-{
-	m_debugWire.Draw();
 }
 
 void Enemy::UpdateCollision()
@@ -123,6 +123,14 @@ void Enemy::UpdateCollision()
 			groundPos + Math::Vector3(0, -0.1f, 0);
 		SetPos(hitPos);
 		m_gravity = 0;
+	}
+	else
+	{
+		notHitCnt++;
+		if (notHitCnt >= 60)
+		{
+			SceneManager::Instance().SetNextScene(SceneManager::SceneType::Win);
+		}
 	}
 
 	/* ==================== */

@@ -28,7 +28,6 @@ void LoseScene::Init()
 	// シーン
 	std::shared_ptr<LoseText> lose;
 	lose = std::make_shared<LoseText>();
-	//win->SetScale({ 1.0f, 1.0f, 1.0f });
 	m_objList.push_back(lose);
 
 	// 地形

@@ -1,16 +1,17 @@
 #pragma once
+#include "../ObjBase.h"
 
-class CameraBase :public KdGameObject
+class CameraBase :public ObjBase
 {
 public:
 	CameraBase() { Init(); }
 	~CameraBase() {}
 
-	void Update();
-	void PreDraw();
-	void Init();
+	void Init()		override;
+	void Update()	override;
+	void PreDraw()	override;
 
-	void SetTarget(const std::shared_ptr<KdGameObject>& target);
+	void SetTarget(const std::shared_ptr<KdGameObject>& _target);
 
 	const std::shared_ptr<KdCamera>& GetCamera() { return m_spCamera; }
 	const std::shared_ptr<KdCamera>& WorkCamera() { return m_spCamera; }
@@ -31,10 +32,11 @@ public:
 		return	Math::Matrix::CreateRotationY(
 			DirectX::XMConvertToRadians(m_degAng.y));
 	}
+
 protected:
 	// ƒJƒƒ‰•Ï”(‰ñ“]‚³‚¹‚È‚¢I)
-	std::shared_ptr<KdCamera>	m_spCamera = nullptr;
-	std::weak_ptr<KdGameObject>	m_wpTarget;
+	std::shared_ptr<KdCamera>			m_spCamera = nullptr;
+	std::weak_ptr<const KdGameObject>	m_wpTarget;
 
 	Math::Matrix	m_localMat;
 	Math::Matrix	m_rot;

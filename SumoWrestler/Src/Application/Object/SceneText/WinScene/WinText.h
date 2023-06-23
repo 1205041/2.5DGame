@@ -1,14 +1,15 @@
 #pragma once
+#include "../../ObjBase.h"
 
-class WinText :public KdGameObject
+class WinText :public ObjBase
 {
 public:
 	WinText() { Init(); }
 	~WinText() {}
 
-	void DrawSprite()override;
+	void PostUpdate()override;
+	void DrawUnLit()override;
 	void Init()		 override;
 private:
-	KdSquarePolygon m_poly;
-	Math::Vector3	m_pos;
+
 };

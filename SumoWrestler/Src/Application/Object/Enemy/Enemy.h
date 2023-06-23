@@ -1,6 +1,7 @@
 #pragma once
+#include "../ObjBase.h"
 
-class Enemy :public KdGameObject
+class Enemy :public ObjBase
 {
 public:
 	Enemy() { Init(); }
@@ -13,27 +14,11 @@ public:
 	void DrawLit()					override;
 
 	void Init()						override;
-
-	void DrawDebug()				override;
-
 private:
 	// 衝突判定とそれに伴う座標の更新
 	void UpdateCollision();
 
-	KdSquarePolygon m_poly;
-	Math::Vector3   m_moveVec;
-	Math::Vector3	m_nowPos;
-	float			m_anime = 0.0f;
-
-	float		m_gravity = 0.0f;
+	// キャラの移動
+	float		m_anime = 0.0f;
 	int			m_cnt = 0;
-
-	// 当たり判定用変数
-	const float		enableStepHigh	= 0.2f;
-	float			maxOverLap		= 0.0f;
-	bool			hit				= false;
-	Math::Vector3	groundPos;
-
-	// デバック用
-	KdDebugWireFrame m_debugWire;
 };

@@ -1,6 +1,7 @@
 #pragma once
+#include "../ObjBase.h"
 
-class SkySphere :public KdGameObject
+class SkySphere :public ObjBase
 {
 public:
 	SkySphere() { Init(); }
@@ -11,6 +12,5 @@ public:
 	void Init()		override;
 
 private:
-	std::shared_ptr<KdModelWork> m_model;
 	
 };

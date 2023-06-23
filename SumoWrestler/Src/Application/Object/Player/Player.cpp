@@ -81,7 +81,7 @@ void Player::Init()
 	if (!m_spPoly)
 	{
 		m_spPoly = std::make_shared<KdSquarePolygon>();
-		m_spPoly->SetMaterial("Asset/Textures/char.png");
+		m_spPoly->SetMaterial(KdAssets::Instance().m_textures.GetData("Asset/Textures/Player/char.png"));
 
 		m_spPoly->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
 		m_spPoly->SetSplit(6, 6);
@@ -99,11 +99,6 @@ void Player::Init()
 
 	m_pCollider = std::make_unique<KdCollider>();
 	m_pCollider->RegisterCollisionShape("PlayerCollider", GetPos(), 0.3f, KdCollider::TypeBump);
-}
-
-void Player::DrawDebug()
-{
-	m_debugWire.Draw();
 }
 
 void Player::UpdateRotate(Math::Vector3& _srcMoveVec)
