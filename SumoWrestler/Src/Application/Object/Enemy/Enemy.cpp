@@ -72,10 +72,6 @@ void Enemy::Init()
 	SetPos({ 3.0f,0,0 });
 	m_moveVec = Math::Vector3::Zero;
 	m_mWorld = Math::Matrix::Identity;
-
-	// “–‚½‚è”»’è—p•Ï”‰Šú‰»
-	maxOverLap	= 0.0f;
-	hit			= false;
 }
 
 void Enemy::UpdateCollision()

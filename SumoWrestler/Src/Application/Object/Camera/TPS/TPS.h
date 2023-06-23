@@ -12,6 +12,5 @@ public:
 
 private:
 	void UpdateRotateByMouse();
-
 	POINT m_FixMousePos;
 };

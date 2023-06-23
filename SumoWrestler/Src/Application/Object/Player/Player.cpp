@@ -9,22 +9,23 @@ void Player::Update()
 
 	// キャラクターの移動速度
 	m_nowPos  = GetPos();
+
 	m_moveVec = Math::Vector3::Zero;
 	if (GetAsyncKeyState('D') & 0x8000) { m_moveVec.x = 1.0f; }
 	if (GetAsyncKeyState('A') & 0x8000) { m_moveVec.x = -1.0f; }
 	if (GetAsyncKeyState('W') & 0x8000) { m_moveVec.z = 1.0f; }
 	if (GetAsyncKeyState('S') & 0x8000) { m_moveVec.z = -1.0f; }
-	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
-	{
-		if (!m_pushFlg)
-		{
-			m_pushFlg = true;
-		}
-	}
-	else
-	{
-		m_pushFlg = false;
-	}
+//	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+//	{
+//		if (!m_pushFlg)
+//		{
+//			m_pushFlg = true;
+//		}
+//	}
+//	else
+//	{
+//		m_pushFlg = false;
+//	}
 
 	// カメラ情報
 	std::shared_ptr<CameraBase> spCamera = m_wpCamera.lock();
@@ -39,6 +40,8 @@ void Player::Update()
 
 	m_nowPos += m_moveVec;
 
+	UpdateRotate(m_moveVec);
+
 	// キャラのアニメーション
 	// 24,25,26→24,25,24,26
 	int Run[4] = { 24,25,24,26 };
@@ -49,12 +52,10 @@ void Player::Update()
 
 void Player::PostUpdate()
 {
-	UpdateRotate(m_moveVec);
-
 	// キャラクターのワールド行列を創る処理
 	Math::Matrix rotation = Math::Matrix::CreateRotationY
 	(DirectX::XMConvertToRadians(m_worldRot.y));
-	m_mWorld = rotation * Math::Matrix::CreateTranslation(m_nowPos);
+	m_mWorld = Math::Matrix::CreateTranslation(m_nowPos);
 	
 	UpdateCollision();
 }
@@ -92,10 +93,6 @@ void Player::Init()
 
 	// アニメーション初期化
 	m_anime = 0.0f;
-
-	// 当たり判定用変数
-	maxOverLap	= 0.0f;
-	hit			= false;
 
 	m_pCollider = std::make_unique<KdCollider>();
 	m_pCollider->RegisterCollisionShape("PlayerCollider", GetPos(), 0.3f, KdCollider::TypeBump);

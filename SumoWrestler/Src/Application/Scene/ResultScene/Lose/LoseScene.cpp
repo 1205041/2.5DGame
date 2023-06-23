@@ -11,7 +11,7 @@
 #include "../../../Object/SceneText/LoseScene/LoseText.h"
 
 // ƒJƒƒ‰
-#include "../../../Object/Camera/FPS/FPS.h"
+#include "../../../Object/Camera/Tracking/Tracking.h"
 
 void LoseScene::Event()
 {
@@ -46,8 +46,8 @@ void LoseScene::Init()
 	m_objList.push_back(player);
 
 	// ƒJƒƒ‰‚Ì‰Šú‰»
-	std::shared_ptr<FPS> fps = std::make_shared<FPS>();;
-	fps->SetTarget(player);
-	player->SetCamera(fps);
-	m_objList.push_back(fps);
+	std::shared_ptr<Tracking> trac = std::make_shared<Tracking>();;
+	trac->SetTarget(player);
+	player->SetCamera(trac);
+	m_objList.push_back(trac);
 }

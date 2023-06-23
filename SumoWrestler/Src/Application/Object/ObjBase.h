@@ -24,9 +24,10 @@ public:
 
 	void DrawDebug() final { m_debugWire.Draw(); }
 protected:
-	// モデルとポリゴンのスマポ
-	std::shared_ptr<KdModelWork>		m_spModel = nullptr;
-	std::shared_ptr<KdSquarePolygon>	m_spPoly = nullptr;
+	// モデルとポリゴンとカメラのスマポ
+	std::shared_ptr<KdModelWork>		m_spModel	= nullptr;
+	std::shared_ptr<KdSquarePolygon>	m_spPoly	= nullptr;
+	std::shared_ptr<KdCamera>			m_spCamera	= nullptr;
 
 	Math::Matrix scaleMat = Math::Matrix::Identity;	// 拡縮行列
 	Math::Matrix rotMat = Math::Matrix::Identity;	// 回転行列

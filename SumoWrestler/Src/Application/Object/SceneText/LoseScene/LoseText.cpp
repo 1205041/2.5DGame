@@ -3,16 +3,13 @@
 void LoseText::PostUpdate()
 {
 	// Šgks—ñ
-	scaleMat = Math::Matrix::CreateScale(5.0f, 5.0f, 5.0f);
+	scaleMat = Math::Matrix::CreateScale(10.0f, 5.0f, 10.0f);
 
-	// ‰ñ“]s—ñ
-	rotMat = Math::Matrix::CreateRotationY(DirectX::XMConvertToRadians(90));
-	
 	// À•Ws—ñ
-	transMat = Math::Matrix::CreateTranslation({ 0,0,0 });
+	transMat = Math::Matrix::CreateTranslation({ 0,0,5.0f });
 
 	// s—ñ‡¬(‚r‚q‚s)
-	m_mWorld = scaleMat * rotMat * transMat;
+	m_mWorld = scaleMat * transMat;
 }
 
 void LoseText::DrawUnLit()

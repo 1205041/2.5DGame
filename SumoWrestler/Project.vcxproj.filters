@@ -94,9 +94,6 @@
     <Filter Include="Src\Application\Object\Camera\TPS">
       <UniqueIdentifier>{d27fba3a-a20d-43e5-bb9b-d7f4b70293e0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Application\Object\Camera\FPS">
-      <UniqueIdentifier>{ba6befb1-de1e-4505-8e54-d32230ef8bab}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Src\Application\Object\SceneText">
       <UniqueIdentifier>{e49f03ef-02a9-4cb5-ab09-a913b90aa673}</UniqueIdentifier>
     </Filter>
@@ -267,9 +264,6 @@
     <ClInclude Include="Src\Application\Object\Camera\CameraBase.h">
       <Filter>Src\Application\Object\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Application\Object\Camera\FPS\FPS.h">
-      <Filter>Src\Application\Object\Camera\FPS</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Application\Object\Camera\TPS\TPS.h">
       <Filter>Src\Application\Object\Camera\TPS</Filter>
     </ClInclude>
@@ -421,9 +415,6 @@
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Camera\CameraBase.cpp">
       <Filter>Src\Application\Object\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Application\Object\Camera\FPS\FPS.cpp">
-      <Filter>Src\Application\Object\Camera\FPS</Filter>
     </ClCompile>
     <ClCompile Include="Src\Application\Object\Camera\TPS\TPS.cpp">
       <Filter>Src\Application\Object\Camera\TPS</Filter>

@@ -34,12 +34,8 @@ public:
 	}
 
 protected:
-	// カメラ変数(回転させない！)
-	std::shared_ptr<KdCamera>			m_spCamera = nullptr;
-	std::weak_ptr<const KdGameObject>	m_wpTarget;
-
-	Math::Matrix	m_localMat;
-	Math::Matrix	m_rot;
+	// カメラ変数
+	std::weak_ptr<KdGameObject>	m_wpTarget;
 
 	// カメラ回転用角度
 	Math::Vector3	m_degAng;
