@@ -33,7 +33,6 @@ public:
 	// オブジェクトリストを取得
 	const std::list<std::shared_ptr<KdGameObject>>& GetObjList();
 	void AddObject(const std::shared_ptr<KdGameObject>& _obj);
-
 private:
 	void ChangeScene(const SceneType& _sceneType);
 

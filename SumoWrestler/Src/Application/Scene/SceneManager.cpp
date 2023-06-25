@@ -62,7 +62,6 @@ void SceneManager::AddObject(const std::shared_ptr<KdGameObject>& _obj)
 void SceneManager::ChangeScene(const SceneType& _sceneType)
 {
 	// 現在のシーンを削除
-//	if (m_currentScene) { delete m_currentScene; }
 	KdSafeDelete(m_curtScene);
 
 	// 次のシーンを作成し、現在のシーンにする

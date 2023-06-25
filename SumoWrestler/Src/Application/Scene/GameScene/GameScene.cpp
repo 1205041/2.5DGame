@@ -32,6 +32,7 @@ void GameScene::Init()
 	// ƒLƒƒƒ‰
 	std::shared_ptr<Player> player;
 	player = std::make_shared<Player>();
+	player->SetPos({ -3.0f,-3.0f,0 });
 	player->RegistHitObj(ground);
 	m_objList.push_back(player);
 

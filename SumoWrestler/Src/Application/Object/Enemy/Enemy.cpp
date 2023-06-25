@@ -69,9 +69,8 @@ void Enemy::Init()
 	}
 	m_anime = 0;
 
-	SetPos({ 3.0f,0,0 });
+	SetPos({ 3.0f,-3.0f,0 });
 	m_moveVec = Math::Vector3::Zero;
-	m_mWorld = Math::Matrix::Identity;
 }
 
 void Enemy::UpdateCollision()

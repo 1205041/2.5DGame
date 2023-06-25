@@ -120,7 +120,8 @@ std::shared_ptr<KdSoundInstance3D> KdAudioManager::Play3D(std::string_view rName
 void KdAudioManager::StopAllSound()
 {
 	auto it = m_playList.begin();
-	while (it != m_playList.end()) {
+	while (it != m_playList.end()) 
+	{
 		(*it).second->Stop();
 		++it;
 	}
@@ -132,7 +133,8 @@ void KdAudioManager::StopAllSound()
 void KdAudioManager::PauseAllSound()
 {
 	auto it = m_playList.begin();
-	while (it != m_playList.end()) {
+	while (it != m_playList.end()) 
+	{
 		(*it).second->Pause();
 		++it;
 	}
@@ -144,7 +146,8 @@ void KdAudioManager::PauseAllSound()
 void KdAudioManager::ResumeAllSound()
 {
 	auto it = m_playList.begin();
-	while (it != m_playList.end()) {
+	while (it != m_playList.end()) 
+	{
 		(*it).second->Resume();
 		++it;
 	}

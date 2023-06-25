@@ -16,7 +16,7 @@
 void WinScene::Event()
 {
 	// シーン切替(Result→Title)
-	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
+	if (GetAsyncKeyState('P') & 0x8000)
 	{
 		SceneManager::Instance().SetNextScene(SceneManager::SceneType::Title);
 	}
@@ -42,12 +42,13 @@ void WinScene::Init()
 	// キャラ
 	std::shared_ptr<Player> player;
 	player = std::make_shared<Player>();
+	player->SetPos({ 0,0,0 });
 	player->RegistHitObj(ground);
 	m_objList.push_back(player);
 
 	// カメラの初期化
-	std::shared_ptr<Tracking> trac = std::make_shared<Tracking>();;
-	trac->SetTarget(player);
-	player->SetCamera(trac);
+	std::shared_ptr<Tracking> trac;
+	trac = std::make_shared<Tracking>();
+	trac->SetTarget(win);
 	m_objList.push_back(trac);
 }

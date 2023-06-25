@@ -3,7 +3,7 @@
 void TitleText::PostUpdate()
 {
 	// Šgks—ñ
-	scaleMat = Math::Matrix::CreateScale(10.0f, 5.0f, 10.0f);
+	scaleMat = Math::Matrix::CreateScale(10.0f, 8.0f, 10.0f);
 
 	// À•Ws—ñ
 	transMat = Math::Matrix::CreateTranslation({ 0,0,5.0f });

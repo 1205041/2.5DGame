@@ -88,7 +88,6 @@ void Player::Init()
 		m_spPoly->SetSplit(6, 6);
 	}
 
-	SetPos({ -3.0f,-3.0f,0 });
 	m_moveSpd = 0.05f;
 
 	// アニメーション初期化
