@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "../Player/Player.h"
 
 void Enemy::Update()
 {
@@ -6,9 +7,10 @@ void Enemy::Update()
 	if (GetPos().y < -10) { m_isExpired = true; }
 
 	// ’Ç]ˆÚ“®
-	m_ang = DirectX::XMConvertToDegrees(atan2(m_nowPos.z, m_nowPos.x));
 	
 	m_nowPos = GetPos();
+
+	m_ang = DirectX::XMConvertToDegrees(atan2(playerPos.z - m_nowPos.z, playerPos.x - m_nowPos.x));
 
 	m_moveVec.Normalize();
 	m_nowPos.x += m_moveVec.x * cos(DirectX::XMConvertToRadians(m_ang));

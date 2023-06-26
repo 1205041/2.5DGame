@@ -47,6 +47,7 @@ void GameScene::Init()
 
 	enemy->RegistHitObj(ground);
 	enemy->RegistHitObj(player);
+	enemy->SetPlayerPos(player);
 
 	m_objList.push_back(player);
 	m_objList.push_back(enemy);
