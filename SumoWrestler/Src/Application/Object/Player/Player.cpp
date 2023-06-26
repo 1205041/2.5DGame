@@ -138,91 +138,95 @@ void Player::UpdateCollision()
 	/* ====================== */
 	/* 当たり判定(レイ判定用) */
 	/* ====================== */
-	KdCollider::RayInfo rayInfo;		// レイの発射位置を設定
-	rayInfo.m_pos = GetPos();			//GetPos()はキャラの足元のはず！
-	rayInfo.m_dir = Math::Vector3::Down;// レイの発射方向を設定
-	rayInfo.m_pos.y += 0.1f;			// 少し高い所から飛ばす
+	// ①当たり判定(レイ判定)用の情報を作成
+	KdCollider::RayInfo rayInfo;
+	rayInfo.m_pos = GetPos();				// レイの発射位置を設定
+	rayInfo.m_dir = Math::Vector3::Down;	// レイの発射方向を設定
+	rayInfo.m_type = KdCollider::TypeGround;// 当たり判定をしたいタイプを設定
 
-	// 段差の許容範囲
+	// 少し高い所から飛ばす(段差の許容範囲)
 	rayInfo.m_pos.y += enableStepHigh;
-	rayInfo.m_range = m_gravity + enableStepHigh;	// レイの長さを設定
-	rayInfo.m_type = KdCollider::TypeGround;		// 当たり判定をしたいタイプを設定
+	rayInfo.m_range = m_gravity + enableStepHigh;// レイの長さを設定
 
 	/* === デバック用 === */
-//	m_debugWire.AddDebugLine(rayInfo.m_pos, rayInfo.m_dir, rayInfo.m_range);
+	m_debugWire.AddDebugLine(rayInfo.m_pos, rayInfo.m_dir, rayInfo.m_range);
 
-	// レイに当たったオブジェクト情報を格納するリスト
-	std::list<KdCollider::CollisionResult> retRayList;
-
-	/* レイと当たり判定をする */
-	for (auto& obj : SceneManager::Instance().GetObjList()) { obj->Intersects(rayInfo, &retRayList); }
-
-	// レイに当たったリストから一番近いオブジェクトを検出
-	maxOverLap	= 0.0f;
-	hit			= false;
-	groundPos	= Math::Vector3::Zero;
-	for (auto& ret : retRayList)
+	// ②HIT判定対象オブジェクトに総当たり
+	for (std::weak_ptr<KdGameObject>wpGameObj : m_wpHitObjList)
 	{
-		// レイを遮断してオーバーした長さが一番長いものを探す
-		if (maxOverLap < ret.m_overlapDistance)
+		if (!wpGameObj.expired())
 		{
-			maxOverLap	= ret.m_overlapDistance;
-			groundPos	= ret.m_hitPos;
-			hit			= true;
-		}
-	}
-	if (hit)
-	{
-		// 地面に当たっている
-		Math::Vector3	hitPos =
-			groundPos + Math::Vector3(0, -0.1f, 0);
-		SetPos(hitPos);
-		m_gravity = 0;
-	}
-	else
-	{
-		notHitCnt++;
-		if (notHitCnt >= 60)
-		{
-			KdAudioManager::Instance().StopAllSound();
-			SceneManager::Instance().SetNextScene(SceneManager::SceneType::Lose);
+			std::shared_ptr<KdGameObject> spGameObj = wpGameObj.lock();
+			if (spGameObj)
+			{
+				std::list<KdCollider::CollisionResult> retRayList;
+				spGameObj->Intersects(rayInfo, &retRayList);
+
+				// ③結果を使って座標を補完する
+				// レイに当たったリストから一番近いオブジェクトを検出
+				maxOverLap	= 0.0f;
+				hit			= false;
+				groundPos	= Math::Vector3::Zero;
+				for (auto& ret : retRayList)
+				{
+					// レイを遮断しオーバーした長さが一番長いものを探す
+					if (maxOverLap < ret.m_overlapDistance)
+					{
+						maxOverLap	= ret.m_overlapDistance;
+						groundPos	= ret.m_hitPos;
+						hit			= true;
+					}
+				}
+				// 何かしらに当たっている
+				if (hit)
+				{
+					SetPos(groundPos);
+					m_gravity = 0;
+					notHitCnt = 0;
+				}
+				else
+				{
+					notHitCnt++;
+					if (notHitCnt >= 60)
+					{
+						KdAudioManager::Instance().StopAllSound();
+						SceneManager::Instance().SetNextScene(SceneManager::SceneType::Lose);
+					}
+				}
+			}
 		}
 	}
 
 	/* ==================== */
 	/* 当たり判定(球判定用) */
 	/* ==================== */
-	KdCollider::SphereInfo sphereInfo;		// 球判定用の変数
-	sphereInfo.m_sphere.Center = GetPos() + Math::Vector3(0, 0.6f, 0);	// 球の中心位置を設定
-	sphereInfo.m_sphere.Radius = 0.25f;									// 球の半径を設定
-	sphereInfo.m_type = KdCollider::TypeBump;		// 当たり判定をしたいタイプを設定
+	// ①当たり判定(球判定)用の情報を作成
+	KdCollider::SphereInfo sphereInfo;
+	sphereInfo.m_sphere.Center = GetPos() + Math::Vector3(0, 0.5f, 0);
+	sphereInfo.m_sphere.Radius = 0.5f;
+	sphereInfo.m_type = KdCollider::TypeBump;
 
 	/* === デバック用(球) === */
 	m_debugWire.AddDebugSphere(sphereInfo.m_sphere.Center, sphereInfo.m_sphere.Radius);
 
-	// 球に当たったオブジェクト情報を格納するリスト
-	std::list<KdCollider::CollisionResult> retSphereList;
-
-	// 球と当たり判定
-	for (auto& obj : SceneManager::Instance().GetObjList()) { obj->Intersects(sphereInfo, &retSphereList); }
-
-	// 球に当たったリストから一番近いオブジェクトを検出
-	maxOverLap	= 0.0f;
-	hit			= false;
-	Math::Vector3 hitDir = Math::Vector3::Zero;// 当たっている方向
-	for (auto& ret : retSphereList)
+	// ②HIT判定対象オブジェクトに総当たり
+	for (std::weak_ptr<KdGameObject>wpGameObj : m_wpHitObjList)
 	{
-		// 一番めり込んだオブジェクトを探す
-		if (maxOverLap < ret.m_overlapDistance)
+		if (!wpGameObj.expired())
 		{
-			maxOverLap = ret.m_overlapDistance;
-			hit = true;
-			hitDir = ret.m_hitDir;// 押し返す方向
+			std::shared_ptr<KdGameObject> spGameObj = wpGameObj.lock();
+			if (spGameObj)
+			{
+				std::list<KdCollider::CollisionResult> retBumpList;
+				spGameObj->Intersects(sphereInfo, &retBumpList);
+
+				for (auto& ret : retBumpList)
+				{
+					Math::Vector3 newPos = GetPos() + (ret.m_hitDir * ret.m_overlapDistance);
+					SetPos(newPos);
+				}
+				// ③結果を使って座標を補完する
+			}
 		}
-	}
-	if (hit)
-	{
-		Math::Vector3 newPos = GetPos() + (hitDir * maxOverLap);
-		SetPos(newPos);
 	}
 }

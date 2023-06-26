@@ -34,13 +34,21 @@ void GameScene::Init()
 
 	// ƒLƒƒƒ‰
 	std::shared_ptr<Player> player;
-	player = std::make_shared<Player>();
-	player->SetPos({ -3.0f,-3.0f,0 });
-	m_objList.push_back(player);
-
 	std::shared_ptr<Enemy> enemy;
+
+	player = std::make_shared<Player>();
 	enemy = std::make_shared<Enemy>();
+
+	player->SetPos({ -3.0f,-3.0f,0 });
 	enemy->SetPos({ 3.0f,-3.0f,0 });
+
+	player->RegistHitObj(ground);
+	player->RegistHitObj(enemy);
+
+	enemy->RegistHitObj(ground);
+	enemy->RegistHitObj(player);
+
+	m_objList.push_back(player);
 	m_objList.push_back(enemy);
 
 	// ƒJƒƒ‰‚Ì‰Šú‰»

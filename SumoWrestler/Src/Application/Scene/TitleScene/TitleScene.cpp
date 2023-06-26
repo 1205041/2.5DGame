@@ -49,6 +49,7 @@ void TitleScene::Init()
 	std::shared_ptr<Player> player;
 	player = std::make_shared<Player>();
 	player->SetPos({ 0,0,0 });
+	player->RegistHitObj(ground);
 	m_objList.push_back(player);
 
 	// ƒJƒƒ‰‚Ì‰Šú‰»

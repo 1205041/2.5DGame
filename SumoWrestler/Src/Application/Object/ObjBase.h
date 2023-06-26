@@ -23,6 +23,8 @@ public:
 	virtual void Init()			override{}
 
 	void DrawDebug()final { m_debugWire.Draw(); }
+
+	void RegistHitObj(const std::shared_ptr<KdGameObject>& _obj) { m_wpHitObjList.push_back(_obj); }
 protected:
 	// モデルとポリゴンとカメラのスマポ
 	std::shared_ptr<KdModelWork>		m_spModel = nullptr;
@@ -42,10 +44,11 @@ protected:
 	Math::Vector3	m_moveVec;
 	
 	// 当たり判定用変数
-	const float		enableStepHigh = 0.2f;
-	float			maxOverLap = 0.0f;
-	int				notHitCnt = 0;
-	bool			hit = false;
+	std::vector<std::weak_ptr<KdGameObject>>	m_wpHitObjList;
+	const float		enableStepHigh	= 0.2f;
+	float			maxOverLap		= 0.0f;
+	int				notHitCnt		= 0;
+	bool			hit				= false;
 	Math::Vector3	groundPos;
 	
 	// デバック用
