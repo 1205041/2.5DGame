@@ -94,7 +94,7 @@ void Player::Init()
 	m_anime = 0.0f;
 
 	m_pCollider = std::make_unique<KdCollider>();
-	m_pCollider->RegisterCollisionShape("PlayerCollider", GetPos(), 0.3f, KdCollider::TypeBump);
+	m_pCollider->RegisterCollisionShape("PlayerCollider", GetPos(), 0.25f, KdCollider::TypeBump);
 }
 
 void Player::UpdateRotate(Math::Vector3& _srcMoveVec)
@@ -149,7 +149,7 @@ void Player::UpdateCollision()
 	rayInfo.m_type = KdCollider::TypeGround;		// 当たり判定をしたいタイプを設定
 
 	/* === デバック用 === */
-	m_debugWire.AddDebugLine(rayInfo.m_pos, rayInfo.m_dir, rayInfo.m_range);
+//	m_debugWire.AddDebugLine(rayInfo.m_pos, rayInfo.m_dir, rayInfo.m_range);
 
 	// レイに当たったオブジェクト情報を格納するリスト
 	std::list<KdCollider::CollisionResult> retRayList;
@@ -184,6 +184,7 @@ void Player::UpdateCollision()
 		notHitCnt++;
 		if (notHitCnt >= 60)
 		{
+			KdAudioManager::Instance().StopAllSound();
 			SceneManager::Instance().SetNextScene(SceneManager::SceneType::Lose);
 		}
 	}
@@ -192,9 +193,9 @@ void Player::UpdateCollision()
 	/* 当たり判定(球判定用) */
 	/* ==================== */
 	KdCollider::SphereInfo sphereInfo;		// 球判定用の変数
-	sphereInfo.m_sphere.Center = GetPos() + Math::Vector3(0, 0.5f, 0);	// 球の中心位置を設定
-	sphereInfo.m_sphere.Radius = 0.3f;									// 球の半径を設定
-	sphereInfo.m_type = KdCollider::TypeDamage;		// 当たり判定をしたいタイプを設定
+	sphereInfo.m_sphere.Center = GetPos() + Math::Vector3(0, 0.6f, 0);	// 球の中心位置を設定
+	sphereInfo.m_sphere.Radius = 0.25f;									// 球の半径を設定
+	sphereInfo.m_type = KdCollider::TypeBump;		// 当たり判定をしたいタイプを設定
 
 	/* === デバック用(球) === */
 	m_debugWire.AddDebugSphere(sphereInfo.m_sphere.Center, sphereInfo.m_sphere.Radius);
@@ -221,8 +222,7 @@ void Player::UpdateCollision()
 	}
 	if (hit)
 	{
-		Math::Vector3 newPos =
-			GetPos() + (hitDir * maxOverLap);
+		Math::Vector3 newPos = GetPos() + (hitDir * maxOverLap);
 		SetPos(newPos);
 	}
 }

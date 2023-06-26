@@ -5,9 +5,6 @@ void Enemy::Update()
 	// 期限切れを有効にする
 	if (GetPos().y < -10) { m_isExpired = true; }
 
-	// デバック用
-	m_debugWire.AddDebugSphere(GetPos() + Math::Vector3(0, 0.5f, 0), 0.2f, { 0,1,0,1 });
-
 	m_nowPos = GetPos();
 	m_nowPos.x += m_moveVec.x;
 	m_nowPos.y += m_moveVec.y;
@@ -69,8 +66,10 @@ void Enemy::Init()
 	}
 	m_anime = 0;
 
-	SetPos({ 3.0f,-3.0f,0 });
 	m_moveVec = Math::Vector3::Zero;
+
+	m_pCollider = std::make_unique<KdCollider>();
+	m_pCollider->RegisterCollisionShape("EnemyCollider", GetPos(), 0.25f, KdCollider::TypeBump);
 }
 
 void Enemy::UpdateCollision()
@@ -89,7 +88,7 @@ void Enemy::UpdateCollision()
 	rayInfo.m_type = KdCollider::TypeGround;		// 当たり判定をしたいタイプを設定
 
 	/* === デバック用 === */
-	m_debugWire.AddDebugLine(rayInfo.m_pos, rayInfo.m_dir, rayInfo.m_range);
+//	m_debugWire.AddDebugLine(rayInfo.m_pos, rayInfo.m_dir, rayInfo.m_range);
 
 	// レイに当たったオブジェクト情報を格納するリスト
 	std::list<KdCollider::CollisionResult> retRayList;
@@ -124,6 +123,7 @@ void Enemy::UpdateCollision()
 		notHitCnt++;
 		if (notHitCnt >= 60)
 		{
+			KdAudioManager::Instance().StopAllSound();
 			SceneManager::Instance().SetNextScene(SceneManager::SceneType::Win);
 		}
 	}
@@ -132,9 +132,9 @@ void Enemy::UpdateCollision()
 	/* 当たり判定(球判定用) */
 	/* ==================== */
 	KdCollider::SphereInfo sphereInfo;		// 球判定用の変数
-	sphereInfo.m_sphere.Center = GetPos() + Math::Vector3(0, 0.5f, 0);	// 球の中心位置を設定
-	sphereInfo.m_sphere.Radius = 0.3f;									// 球の半径を設定
-	sphereInfo.m_type = KdCollider::TypeDamage;		// 当たり判定をしたいタイプを設定
+	sphereInfo.m_sphere.Center = GetPos() + Math::Vector3(0, 0.6f, 0);	// 球の中心位置を設定
+	sphereInfo.m_sphere.Radius = 0.25f;									// 球の半径を設定
+	sphereInfo.m_type = KdCollider::TypeBump;		// 当たり判定をしたいタイプを設定
 
 	/* === デバック用(球) === */
 	m_debugWire.AddDebugSphere(sphereInfo.m_sphere.Center, sphereInfo.m_sphere.Radius);
@@ -162,8 +162,7 @@ void Enemy::UpdateCollision()
 	if (hit)
 	{
 		// 押し返し
-		Math::Vector3 newPos =
-			GetPos() + (hitDir * maxOverLap);
+		Math::Vector3 newPos = GetPos() + (hitDir * maxOverLap);
 		SetPos(newPos);
 	}
 }

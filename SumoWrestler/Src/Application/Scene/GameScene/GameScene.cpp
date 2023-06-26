@@ -19,6 +19,9 @@ void GameScene::Event()
 
 void GameScene::Init()
 {
+	KdAudioManager::Instance().Play("Asset/Sounds/SE/GameStart.wav");
+	KdAudioManager::Instance().Play("Asset/Sounds/BGM/Game.wav", true);
+
 	/* オブジェクトの初期化 */
 	// 地形
 	std::shared_ptr<Ground> ground;
@@ -33,11 +36,11 @@ void GameScene::Init()
 	std::shared_ptr<Player> player;
 	player = std::make_shared<Player>();
 	player->SetPos({ -3.0f,-3.0f,0 });
-	player->RegistHitObj(ground);
 	m_objList.push_back(player);
 
 	std::shared_ptr<Enemy> enemy;
 	enemy = std::make_shared<Enemy>();
+	enemy->SetPos({ 3.0f,-3.0f,0 });
 	m_objList.push_back(enemy);
 
 	// カメラの初期化

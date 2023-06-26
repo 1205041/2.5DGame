@@ -19,8 +19,6 @@ public:
 
 	void SetCamera(const std::shared_ptr<CameraBase>& _camera) { m_wpCamera = _camera; }
 	
-	void RegistHitObj(const std::shared_ptr<KdGameObject>& _obj) { m_wpHitObjList.push_back(_obj); }
-
 private:
 	void UpdateRotate(Math::Vector3& _srcMoveVec);
 
@@ -29,9 +27,6 @@ private:
 
 	std::weak_ptr<CameraBase>					m_wpCamera;
 
-	// 当たり判定リスト
-	std::vector<std::weak_ptr<KdGameObject>>	m_wpHitObjList;
-	
 	// キャラクターの移動速度
 	float			m_moveSpd = 0.0f;
 

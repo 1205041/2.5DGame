@@ -174,9 +174,7 @@ public:
 
 	KdSoundEffect() {}
 
-	~KdSoundEffect() {
-		m_soundEffect = nullptr;
-	}
+	~KdSoundEffect() { m_soundEffect = nullptr; }
 
 	std::unique_ptr<DirectX::SoundEffectInstance> CreateInstance(DirectX::SOUND_EFFECT_INSTANCE_FLAGS flag)
 	{

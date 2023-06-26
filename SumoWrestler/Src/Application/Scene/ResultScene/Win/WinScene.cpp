@@ -18,12 +18,17 @@ void WinScene::Event()
 	// シーン切替(Result→Title)
 	if (GetAsyncKeyState('P') & 0x8000)
 	{
+		KdAudioManager::Instance().Play("Asset/Sounds/SE/PushButton.wav");
 		SceneManager::Instance().SetNextScene(SceneManager::SceneType::Title);
+		KdAudioManager::Instance().StopAllSound();
 	}
 }
 
 void WinScene::Init()
 {
+	KdAudioManager::Instance().Play("Asset/Sounds/SE/GameSet.wav");
+	KdAudioManager::Instance().Play("Asset/Sounds/BGM/Result.wav", true);
+
 	/* オブジェクトの初期化 */
 	// シーン
 	std::shared_ptr<WinText> win;
@@ -43,7 +48,6 @@ void WinScene::Init()
 	std::shared_ptr<Player> player;
 	player = std::make_shared<Player>();
 	player->SetPos({ 0,0,0 });
-	player->RegistHitObj(ground);
 	m_objList.push_back(player);
 
 	// カメラの初期化

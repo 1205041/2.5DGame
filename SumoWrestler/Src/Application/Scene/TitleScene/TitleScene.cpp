@@ -15,12 +15,12 @@
 
 void TitleScene::Event()
 {
-//	KdAudioManager::Instance().Play("Asset/Sounds/BGM/Title.WAV");
- 
 	// シーン切替(Title→Game)
 	if (GetAsyncKeyState(VK_RETURN) & 0x8000)
 	{
+		KdAudioManager::Instance().Play("Asset/Sounds/SE/PushButton.wav");
 		SceneManager::Instance().SetNextScene(SceneManager::SceneType::Game);
+		KdAudioManager::Instance().StopAllSound();
 	}
 }
 
@@ -28,6 +28,8 @@ void TitleScene::Init()
 {
 	ShowCursor(false);
 
+	KdAudioManager::Instance().Play("Asset/Sounds/BGM/Title.wav", true);
+	
 	/* オブジェクトの初期化 */
 	// シーン
 	std::shared_ptr<TitleText> title;
@@ -47,7 +49,6 @@ void TitleScene::Init()
 	std::shared_ptr<Player> player;
 	player = std::make_shared<Player>();
 	player->SetPos({ 0,0,0 });
-	player->RegistHitObj(ground);
 	m_objList.push_back(player);
 
 	// カメラの初期化
