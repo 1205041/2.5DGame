@@ -5,18 +5,24 @@ void Enemy::Update()
 {
 	// 期限切れを有効にする
 	if (GetPos().y < -10) { m_isExpired = true; }
+	if(m_isExpired)
+	{
+		KdAudioManager::Instance().StopAllSound();
+		SceneManager::Instance().SetNextScene(SceneManager::SceneType::Win);
+	}
+
+	m_gravity += 0.01f;
+	m_mWorld._42 -= m_gravity;
 
 	// 追従移動
-	
 	m_nowPos = GetPos();
 
-	m_ang = DirectX::XMConvertToDegrees(atan2(playerPos.z - m_nowPos.z, playerPos.x - m_nowPos.x));
-
+	m_moveVec = Math::Vector3::Zero;
+	
 	m_moveVec.Normalize();
-	m_nowPos.x += m_moveVec.x * cos(DirectX::XMConvertToRadians(m_ang));
-	m_nowPos.z += m_moveVec.z * sin(DirectX::XMConvertToRadians(m_ang));
-	m_nowPos.y -= m_gravity;
-	m_gravity += 0.005f;
+	m_moveVec *= m_moveSpd;
+
+	m_nowPos += m_moveVec;
 
 	// アニメーション
 	int Walk[4] = { 3,4,3,5 };
@@ -65,6 +71,7 @@ void Enemy::Init()
 	}
 	m_anime = 0;
 
+	m_moveSpd = 0.05f;
 	m_moveVec = Math::Vector3::Zero;
 
 	m_pCollider = std::make_unique<KdCollider>();
@@ -104,32 +111,22 @@ void Enemy::UpdateCollision()
 				// レイに当たったリストから一番近いオブジェクトを検出
 				maxOverLap	= 0.0f;
 				hit			= false;
-				groundPos	= Math::Vector3::Zero;
+				hitPos		= Math::Vector3::Zero;
 				for (auto& ret : retRayList)
 				{
 					// レイを遮断しオーバーした長さが一番長いものを探す
 					if (maxOverLap < ret.m_overlapDistance)
 					{
 						maxOverLap	= ret.m_overlapDistance;
-						groundPos	= ret.m_hitPos;
+						hitPos		= ret.m_hitPos;
 						hit			= true;
 					}
 				}
 				// 何かしらに当たっている
 				if (hit)
 				{
-					SetPos(groundPos);
+					SetPos(hitPos);
 					m_gravity = 0;
-					notHitCnt = 0;
-				}
-				else
-				{
-					notHitCnt++;
-					if (notHitCnt >= 60)
-					{
-						KdAudioManager::Instance().StopAllSound();
-						SceneManager::Instance().SetNextScene(SceneManager::SceneType::Win);
-					}
 				}
 			}
 		}

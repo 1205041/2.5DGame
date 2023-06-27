@@ -26,22 +26,26 @@ public:
 
 	void RegistHitObj(const std::shared_ptr<KdGameObject>& _obj) { m_wpHitObjList.push_back(_obj); }
 protected:
+	//srcから見たdestの角度を習得する関数
+	float GetAngleDeg(Math::Vector3 _src, Math::Vector3 _dest);	//角度
+
 	// モデルとポリゴンとカメラのスマポ
-	std::shared_ptr<KdModelWork>		m_spModel = nullptr;
-	std::shared_ptr<KdSquarePolygon>	m_spPoly = nullptr;
-	std::shared_ptr<KdCamera>			m_spCamera = nullptr;
+	std::shared_ptr<KdModelWork>		m_spModel	= nullptr;
+	std::shared_ptr<KdSquarePolygon>	m_spPoly	= nullptr;
+	std::shared_ptr<KdCamera>			m_spCamera	= nullptr;
 	
-	Math::Matrix scaleMat = Math::Matrix::Identity;	// 拡縮行列
-	Math::Matrix rotMat = Math::Matrix::Identity;	// 回転行列
-	Math::Matrix transMat = Math::Matrix::Identity;	// 座標行列
+	Math::Matrix scaleMat	= Math::Matrix::Identity;	// 拡縮行列
+	Math::Matrix rotMat		= Math::Matrix::Identity;	// 回転行列
+	Math::Matrix transMat	= Math::Matrix::Identity;	// 座標行列
 	
 	// 重力とアニメーション
-	float			m_gravity = 0.0f;
-	float			m_anime = 0.0f;
+	float			m_gravity	= 0.0f;
+	float			m_anime		= 0.0f;
 	
 	// キャラの移動速度
-	Math::Vector3	m_nowPos;
-	Math::Vector3	m_moveVec;
+	float			m_moveSpd	= 0.0f;
+	Math::Vector3	m_nowPos	= Math::Vector3::Zero;
+	Math::Vector3	m_moveVec	= Math::Vector3::Zero;
 	
 	// 当たり判定用変数
 	std::vector<std::weak_ptr<KdGameObject>>	m_wpHitObjList;
@@ -49,7 +53,7 @@ protected:
 	float			maxOverLap		= 0.0f;
 	int				notHitCnt		= 0;
 	bool			hit				= false;
-	Math::Vector3	groundPos;
+	Math::Vector3	hitPos			= Math::Vector3::Zero;
 	
 	// デバック用
 	KdDebugWireFrame m_debugWire;

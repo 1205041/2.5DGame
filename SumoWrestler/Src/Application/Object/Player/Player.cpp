@@ -4,6 +4,13 @@
 
 void Player::Update()
 {
+	if (GetPos().y < -10) { m_isExpired = true; }
+	if (m_isExpired)
+	{
+		KdAudioManager::Instance().StopAllSound();
+		SceneManager::Instance().SetNextScene(SceneManager::SceneType::Lose);
+	}
+
 	m_gravity += 0.01f;
 	m_mWorld._42 -= m_gravity;
 
@@ -15,17 +22,17 @@ void Player::Update()
 	if (GetAsyncKeyState('A') & 0x8000) { m_moveVec.x = -1.0f; }
 	if (GetAsyncKeyState('W') & 0x8000) { m_moveVec.z = 1.0f; }
 	if (GetAsyncKeyState('S') & 0x8000) { m_moveVec.z = -1.0f; }
-//	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
-//	{
-//		if (!m_pushFlg)
-//		{
-//			m_pushFlg = true;
-//		}
-//	}
-//	else
-//	{
-//		m_pushFlg = false;
-//	}
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+	{
+		if (!m_pushFlg)
+		{
+			m_pushFlg = true;
+		}
+	}
+	else
+	{
+		m_pushFlg = false;
+	}
 
 	// カメラ情報
 	std::shared_ptr<CameraBase> spCamera = m_wpCamera.lock();
@@ -166,32 +173,22 @@ void Player::UpdateCollision()
 				// レイに当たったリストから一番近いオブジェクトを検出
 				maxOverLap	= 0.0f;
 				hit			= false;
-				groundPos	= Math::Vector3::Zero;
+				hitPos		= Math::Vector3::Zero;
 				for (auto& ret : retRayList)
 				{
 					// レイを遮断しオーバーした長さが一番長いものを探す
 					if (maxOverLap < ret.m_overlapDistance)
 					{
 						maxOverLap	= ret.m_overlapDistance;
-						groundPos	= ret.m_hitPos;
+						hitPos		= ret.m_hitPos;
 						hit			= true;
 					}
 				}
 				// 何かしらに当たっている
 				if (hit)
 				{
-					SetPos(groundPos);
+					SetPos(hitPos);
 					m_gravity = 0;
-					notHitCnt = 0;
-				}
-				else
-				{
-					notHitCnt++;
-					if (notHitCnt >= 60)
-					{
-						KdAudioManager::Instance().StopAllSound();
-						SceneManager::Instance().SetNextScene(SceneManager::SceneType::Lose);
-					}
 				}
 			}
 		}

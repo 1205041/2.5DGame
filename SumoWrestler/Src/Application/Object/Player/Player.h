@@ -27,9 +27,6 @@ private:
 
 	std::weak_ptr<CameraBase>					m_wpCamera;
 
-	// キャラクターの移動速度
-	float			m_moveSpd = 0.0f;
-
 	// ワールド行列を作る為のそれぞれの回転角度
 	Math::Vector3	m_worldRot;
 	
