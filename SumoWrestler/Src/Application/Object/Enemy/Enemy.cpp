@@ -1,6 +1,7 @@
 #include "Enemy.h"
 #include "../Player/Player.h"
 
+// 更新関数
 void Enemy::Update()
 {
 	// 期限切れを有効にする
@@ -24,13 +25,12 @@ void Enemy::Update()
 
 	m_nowPos += m_moveVec;
 
-	// アニメーション
-	int Walk[4] = { 8,9,8,10 };
 	m_spPoly->SetUVRect(Walk[(int)m_anime]);
 	m_anime += 0.05f;
 	if (m_anime >= 4) { m_anime = 0; }
 }
 
+// 更新後更新関数
 void Enemy::PostUpdate()
 {
 	Math::Matrix transMat;
@@ -41,25 +41,23 @@ void Enemy::PostUpdate()
 	UpdateCollision();
 }
 
+// 影描画関数
 void Enemy::GenerateDepthMapFromLight()
 {
-	// 板ポリ(影)
 	if (!m_spPoly) { return; }
-
 	KdShaderManager::Instance().m_HD2DShader.DrawPolygon(*m_spPoly, m_mWorld);
 }
 
+// 板ポリ描画関数
 void Enemy::DrawLit()
 {
-	// 板ポリ(キャラ)
 	if (!m_spPoly) { return; }
-
 	KdShaderManager::Instance().m_HD2DShader.DrawPolygon(*m_spPoly, m_mWorld);
 }
 
+// 初期化関数
 void Enemy::Init()
 {
-	// エネミー初期化
 	if (!m_spPoly)
 	{
 		m_spPoly = std::make_shared<KdSquarePolygon>();
@@ -77,6 +75,7 @@ void Enemy::Init()
 	m_pCollider->RegisterCollisionShape("EnemyCollider", GetPos(), 0.25f, KdCollider::TypeBump);
 }
 
+// 当たり判定関数
 void Enemy::UpdateCollision()
 {
 	/* ====================== */
@@ -93,7 +92,7 @@ void Enemy::UpdateCollision()
 	rayInfo.m_range = m_gravity + enableStepHigh;// レイの長さを設定
 	
 	/* === デバック用 === */
-	m_debugWire.AddDebugLine(rayInfo.m_pos, rayInfo.m_dir, rayInfo.m_range);
+//	m_debugWire.AddDebugLine(rayInfo.m_pos, rayInfo.m_dir, rayInfo.m_range);
  
 	// ②HIT判定対象オブジェクトに総当たり
 	for (std::weak_ptr<KdGameObject>wpGameObj : m_wpHitObjList)

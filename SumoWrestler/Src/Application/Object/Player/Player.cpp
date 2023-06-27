@@ -2,8 +2,11 @@
 
 #include "../Camera/TPS/TPS.h"
 
+// 更新関数
 void Player::Update()
 {
+	m_spPoly->SetUVRect(Walk[(int)m_anime]);
+	
 	if (GetPos().y < -10) { m_isExpired = true; }
 	if (m_isExpired)
 	{
@@ -18,20 +21,25 @@ void Player::Update()
 	m_nowPos  = GetPos();
 
 	m_moveVec = Math::Vector3::Zero;
-	if (GetAsyncKeyState('D') & 0x8000) { m_moveVec.x = 1.0f; }
-	if (GetAsyncKeyState('A') & 0x8000) { m_moveVec.x = -1.0f; }
-	if (GetAsyncKeyState('W') & 0x8000) { m_moveVec.z = 1.0f; }
-	if (GetAsyncKeyState('S') & 0x8000) { m_moveVec.z = -1.0f; }
-	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+	if (GetAsyncKeyState('D') & 0x8000) 
 	{
-		if (!m_pushFlg)
-		{
-			m_pushFlg = true;
-		}
+		m_moveVec.x = 1.0f;
+		m_anime += 0.1f;
 	}
-	else
+	if (GetAsyncKeyState('A') & 0x8000) 
 	{
-		m_pushFlg = false;
+		m_moveVec.x = -1.0f;
+		m_anime += 0.1f;
+	}
+	if (GetAsyncKeyState('W') & 0x8000) 
+	{
+		m_moveVec.z = 1.0f;
+		m_anime += 0.1f;
+	}
+	if (GetAsyncKeyState('S') & 0x8000) 
+	{ 
+		m_moveVec.z = -1.0f;
+		m_anime += 0.1f;
 	}
 
 	// カメラ情報
@@ -49,14 +57,10 @@ void Player::Update()
 
 	UpdateRotate(m_moveVec);
 
-	// キャラのアニメーション
-	// 24,25,26→24,25,24,26
-	int Walk[4] = { 8,9,8,10 };
-	m_spPoly->SetUVRect(Walk[(int)m_anime]);
-	m_anime += 0.05f;
 	if (m_anime >= 4) { m_anime = 0; }
 }
 
+// 更新後更新関数
 void Player::PostUpdate()
 {
 	// キャラクターのワールド行列を創る処理
@@ -67,22 +71,21 @@ void Player::PostUpdate()
 	UpdateCollision();
 }
 
+// 影描画関数
 void Player::GenerateDepthMapFromLight()
 {
-	// 板ポリ(影)
 	if (!m_spPoly) { return; }
-
 	KdShaderManager::Instance().m_HD2DShader.DrawPolygon(*m_spPoly, m_mWorld);
 }
 
+// 板ポリ描画関数
 void Player::DrawLit()
 {
-	// 板ポリ(キャラ)
 	if (!m_spPoly) { return; }
-
 	KdShaderManager::Instance().m_HD2DShader.DrawPolygon(*m_spPoly, m_mWorld);
 }
 
+// 初期化関数
 void Player::Init()
 {
 	// キャラ初期値
@@ -101,19 +104,16 @@ void Player::Init()
 	m_pCollider->RegisterCollisionShape("PlayerCollider", GetPos(), 0.25f, KdCollider::TypeBump);
 }
 
-void Player::UpdateRotate(Math::Vector3& _srcMoveVec)
+void Player::UpdateRotate(const Math::Vector3& _srcMoveVec)
 {
 	// 何も入力が無い場合は処理しない
-	/* 単純な長さを測る時は.LengthSquared()が速い */
 	if (_srcMoveVec.LengthSquared() == 0.0f) { return; }
 
 	// 移動方向のベクトル
 	Math::Vector3 targetDir = _srcMoveVec;
 
-	/* ！！！ キャラの正面方向のベクトル ！！！ */
 	// 今向いている矢印情報が手に入る
 	Math::Vector3 nowDir = GetMatrix().Backward();
-	//	Math::Vector3 nowDir = GetMatrix().Forward();
 
 	targetDir.Normalize();
 	nowDir.Normalize();
@@ -137,6 +137,7 @@ void Player::UpdateRotate(Math::Vector3& _srcMoveVec)
 	m_worldRot.y += rotateAng;
 }
 
+// 当たり判定関数
 void Player::UpdateCollision()
 {
 	/* ====================== */
@@ -153,7 +154,7 @@ void Player::UpdateCollision()
 	rayInfo.m_range = m_gravity + enableStepHigh;// レイの長さを設定
 
 	/* === デバック用 === */
-	m_debugWire.AddDebugLine(rayInfo.m_pos, rayInfo.m_dir, rayInfo.m_range);
+//	m_debugWire.AddDebugLine(rayInfo.m_pos, rayInfo.m_dir, rayInfo.m_range);
 
 	// ②HIT判定対象オブジェクトに総当たり
 	for (std::weak_ptr<KdGameObject>wpGameObj : m_wpHitObjList)

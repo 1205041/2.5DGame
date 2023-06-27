@@ -34,13 +34,18 @@ protected:
 	std::shared_ptr<KdSquarePolygon>	m_spPoly	= nullptr;
 	std::shared_ptr<KdCamera>			m_spCamera	= nullptr;
 	
+	// 行列一覧
 	Math::Matrix scaleMat	= Math::Matrix::Identity;	// 拡縮行列
 	Math::Matrix rotMat		= Math::Matrix::Identity;	// 回転行列
 	Math::Matrix transMat	= Math::Matrix::Identity;	// 座標行列
 	
-	// 重力とアニメーション
-	float			m_gravity	= 0.0f;
-	float			m_anime		= 0.0f;
+	// 重力
+	float	m_gravity = 0.0f;
+
+	// アニメーション
+	// 歩く：8	,9	,8	,10
+	int		Walk[4] = { 8,9,8,10 };
+	float	m_anime	= 0.0f;
 	
 	// キャラの移動速度
 	float			m_moveSpd	= 0.0f;
