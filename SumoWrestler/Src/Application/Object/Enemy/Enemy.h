@@ -21,6 +21,4 @@ private:
 
 	// ƒLƒƒƒ‰‚ÌˆÚ“®
 
-
-	float		m_anime = 0.0f;
 };

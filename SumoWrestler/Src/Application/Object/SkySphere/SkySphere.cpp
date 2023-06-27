@@ -3,7 +3,7 @@
 void SkySphere::PostUpdate()
 {
 	// Šgks—ñ
-	scaleMat = Math::Matrix::CreateScale(20.0f, 20.0f, 20.0f);
+	scaleMat = Math::Matrix::CreateScale(15.0f, 15.0f, 15.0f);
 
 	// À•Ws—ñ
 	transMat = Math::Matrix::CreateTranslation({ 0,-5.0f,0 });

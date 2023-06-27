@@ -3,7 +3,7 @@
 void Ground::PostUpdate()
 {
 	// Šgks—ñ
-	scaleMat = Math::Matrix::CreateScale(0.5f, 0.5f, 0.5f);
+	scaleMat = Math::Matrix::CreateScale(0.3f, 0.3f, 0.3f);
 
 	// À•Ws—ñ
 	transMat = Math::Matrix::CreateTranslation({ 0,-5.0f,0 });

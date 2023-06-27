@@ -25,9 +25,9 @@ void Enemy::Update()
 	m_nowPos += m_moveVec;
 
 	// アニメーション
-	int Walk[4] = { 3,4,3,5 };
+	int Walk[4] = { 8,9,8,10 };
 	m_spPoly->SetUVRect(Walk[(int)m_anime]);
-	m_anime += 0.1f;
+	m_anime += 0.05f;
 	if (m_anime >= 4) { m_anime = 0; }
 }
 
@@ -63,14 +63,13 @@ void Enemy::Init()
 	if (!m_spPoly)
 	{
 		m_spPoly = std::make_shared<KdSquarePolygon>();
-		m_spPoly->SetMaterial(KdAssets::Instance().m_textures.GetData("Asset/Textures/Player/char.png"));
+		m_spPoly->SetMaterial(KdAssets::Instance().m_textures.GetData("Asset/Textures/Enemy/enemy.png"));
 
 		// アニメーション
 		m_spPoly->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
-		m_spPoly->SetSplit(6, 6);
+		m_spPoly->SetSplit(4, 4);
 	}
-	m_anime = 0;
-
+	
 	m_moveSpd = 0.05f;
 	m_moveVec = Math::Vector3::Zero;
 

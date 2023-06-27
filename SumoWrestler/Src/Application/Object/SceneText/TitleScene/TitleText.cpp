@@ -24,6 +24,6 @@ void TitleText::Init()
 	if (!m_spPoly)
 	{
 		m_spPoly = std::make_shared<KdSquarePolygon>();
-		m_spPoly->SetMaterial(KdAssets::Instance().m_textures.GetData("Asset/Textures/Title/title.png"));
+		m_spPoly->SetMaterial(KdAssets::Instance().m_textures.GetData("Asset/Textures/Title/Title.png"));
 	}
 }

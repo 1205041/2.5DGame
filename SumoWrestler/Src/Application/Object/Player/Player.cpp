@@ -51,17 +51,17 @@ void Player::Update()
 
 	// キャラのアニメーション
 	// 24,25,26→24,25,24,26
-	int Run[4] = { 24,25,24,26 };
-	m_spPoly->SetUVRect(Run[(int)m_anime]);
-	m_anime += 0.2f;
+	int Walk[4] = { 8,9,8,10 };
+	m_spPoly->SetUVRect(Walk[(int)m_anime]);
+	m_anime += 0.05f;
 	if (m_anime >= 4) { m_anime = 0; }
 }
 
 void Player::PostUpdate()
 {
 	// キャラクターのワールド行列を創る処理
-	Math::Matrix rotation = Math::Matrix::CreateRotationY
-	(DirectX::XMConvertToRadians(m_worldRot.y));
+	Math::Matrix rotation = Math::Matrix::CreateRotationY(DirectX::XMConvertToRadians(m_worldRot.y));
+//	m_mWorld = rotation * Math::Matrix::CreateTranslation(m_nowPos);
 	m_mWorld = Math::Matrix::CreateTranslation(m_nowPos);
 	
 	UpdateCollision();
@@ -89,16 +89,13 @@ void Player::Init()
 	if (!m_spPoly)
 	{
 		m_spPoly = std::make_shared<KdSquarePolygon>();
-		m_spPoly->SetMaterial(KdAssets::Instance().m_textures.GetData("Asset/Textures/Player/char.png"));
+		m_spPoly->SetMaterial(KdAssets::Instance().m_textures.GetData("Asset/Textures/Player/player.png"));
 
 		m_spPoly->SetPivot(KdSquarePolygon::PivotType::Center_Bottom);
-		m_spPoly->SetSplit(6, 6);
+		m_spPoly->SetSplit(4, 4);
 	}
 
 	m_moveSpd = 0.05f;
-
-	// アニメーション初期化
-	m_anime = 0.0f;
 
 	m_pCollider = std::make_unique<KdCollider>();
 	m_pCollider->RegisterCollisionShape("PlayerCollider", GetPos(), 0.25f, KdCollider::TypeBump);
