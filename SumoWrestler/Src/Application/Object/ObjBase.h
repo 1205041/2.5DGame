@@ -26,6 +26,9 @@ public:
 
 	void RegistHitObj(const std::shared_ptr<KdGameObject>& _obj) { m_wpHitObjList.push_back(_obj); }
 protected:
+	// 衝突判定とそれに伴う座標の更新
+	void UpdateCollision();
+
 	//srcから見たdestの角度を習得する関数
 	float GetAngleDeg(Math::Vector3 _src, Math::Vector3 _dest);	//角度
 

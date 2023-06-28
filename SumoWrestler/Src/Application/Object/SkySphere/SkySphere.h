@@ -7,10 +7,11 @@ public:
 	SkySphere() { Init(); }
 	~SkySphere() {};
 
-	void PostUpdate()override;
-	void DrawUnLit() override;
-	void Init()		override;
+	void Update()		override;
+	void PostUpdate()	override;
+	void DrawUnLit()	override;
+	void Init()			override;
 
 private:
-	
+	int m_cnt = 0;
 };

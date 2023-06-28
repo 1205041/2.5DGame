@@ -1,10 +1,6 @@
 #include "TitleScene.h"
 
-// キャラクター
-#include "../../Object/Player/Player.h"
-
 // 地形
-#include "../../Object/Ground/Ground.h"
 #include "../../Object/SkySphere/SkySphere.h"
 
 // タイトルシーン
@@ -32,28 +28,18 @@ void TitleScene::Init()
 	
 	/* オブジェクトの初期化 */
 	// シーン
-	std::shared_ptr<TitleText> title;
-	title = std::make_shared<TitleText>();
-	m_objList.push_back(title);
+	std::shared_ptr<TitleText> spTitle;
+	spTitle = std::make_shared<TitleText>();
+	m_objList.push_back(spTitle);
 
 	// 地形
-	std::shared_ptr<Ground> ground;
-	ground = std::make_shared<Ground>();
-	m_objList.push_back(ground);
-
-	std::shared_ptr<SkySphere> skySp;
-	skySp = std::make_shared<SkySphere>();
-	m_objList.push_back(skySp);
-
-	// キャラ
-	std::shared_ptr<Player> player;
-	player = std::make_shared<Player>();
-	player->SetPos({ 0,0,0 });
-	player->RegistHitObj(ground);
-	m_objList.push_back(player);
+	std::shared_ptr<SkySphere> spSkySp;
+	spSkySp = std::make_shared<SkySphere>();
+	m_objList.push_back(spSkySp);
 
 	// カメラの初期化
-	std::shared_ptr<Tracking> trac = std::make_shared<Tracking>();;
-	trac->SetTarget(title);
-	m_objList.push_back(trac);
+	std::shared_ptr<Tracking> spTrac;
+	spTrac = std::make_shared<Tracking>();
+	spTrac->SetTarget(spTitle);
+	m_objList.push_back(spTrac);
 }

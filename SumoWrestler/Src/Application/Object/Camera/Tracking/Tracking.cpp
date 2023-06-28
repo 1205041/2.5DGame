@@ -6,7 +6,7 @@ void Tracking::Init()
 	transMat = Math::Matrix::CreateTranslation(0, 0, -1.5f);
 
 	// ‚Ç‚ê‚¾‚¯ŒX‚¯‚Ä‚¢‚é‚©/* ‡”Ô‚ÍY,X,Z */
-	rotMat = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(10));
+	rotMat = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(0));
 
 	CameraBase::Init();
 }

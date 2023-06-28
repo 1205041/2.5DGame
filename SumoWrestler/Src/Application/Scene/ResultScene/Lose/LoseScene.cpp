@@ -1,7 +1,7 @@
 #include "LoseScene.h"
 
 // キャラクター
-#include "../../../Object/Player/Player.h"
+#include "../../../Object/Enemy/Enemy.h"
 
 // 地形
 #include "../../../Object/Ground/Ground.h"
@@ -31,29 +31,29 @@ void LoseScene::Init()
 
 	/* オブジェクトの初期化 */
 	// シーン
-	std::shared_ptr<LoseText> lose;
-	lose = std::make_shared<LoseText>();
-	m_objList.push_back(lose);
+	std::shared_ptr<LoseText> spLose;
+	spLose = std::make_shared<LoseText>();
+	m_objList.push_back(spLose);
 
 	// 地形
-	std::shared_ptr<Ground> ground;
-	ground = std::make_shared<Ground>();
-	m_objList.push_back(ground);
+	std::shared_ptr<Ground> spGround;
+	spGround = std::make_shared<Ground>();
+	m_objList.push_back(spGround);
 
-	std::shared_ptr<SkySphere> skySp;
-	skySp = std::make_shared<SkySphere>();
-	m_objList.push_back(skySp);
+	std::shared_ptr<SkySphere> spSkySp;
+	spSkySp = std::make_shared<SkySphere>();
+	m_objList.push_back(spSkySp);
 
 	// キャラ
-	std::shared_ptr<Player> player;
-	player = std::make_shared<Player>();
-	player->SetPos({ 0,0,0 });
-	player->RegistHitObj(ground);
-	m_objList.push_back(player);
+	std::shared_ptr<Enemy> spEnemy;
+	spEnemy = std::make_shared<Enemy>();
+	spEnemy->SetPos({ 0,0,0 });
+	spEnemy->RegistHitObj(spGround);
+	m_objList.push_back(spEnemy);
 
 	// カメラの初期化
-	std::shared_ptr<Tracking> trac;
-	trac = std::make_shared<Tracking>();
-	trac->SetTarget(lose);
-	m_objList.push_back(trac);
+	std::shared_ptr<Tracking> spTrac;
+	spTrac = std::make_shared<Tracking>();
+	spTrac->SetTarget(spLose);
+	m_objList.push_back(spTrac);
 }

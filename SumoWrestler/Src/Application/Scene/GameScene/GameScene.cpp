@@ -54,7 +54,8 @@ void GameScene::Init()
 	m_objList.push_back(spEnemy);
 	
 	// ƒJƒƒ‰‚Ì‰Šú‰»
-	std::shared_ptr<TPS> spTps = std::make_shared<TPS>();;
+	std::shared_ptr<TPS> spTps;
+	spTps = std::make_shared<TPS>();
 	spTps->SetTarget(spPlayer);
 	spPlayer->SetCamera(spTps);
 	m_objList.push_back(spTps);
