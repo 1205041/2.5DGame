@@ -2,10 +2,10 @@
 
 void SkySphere::Update()
 {
-	m_cnt++;
-	if (m_cnt > 360)
+	m_cnt += 0.5f;
+	if (m_cnt > 360.0f)
 	{
-		m_cnt = 0;
+		m_cnt = 0.0f;
 	}
 }
 
@@ -48,5 +48,5 @@ void SkySphere::Init()
 		m_spModel->SetModelData(KdAssets::Instance().m_modeldatas.GetData("Asset/Models/SkySphere/Doujyou/Doujyou.gltf"));
 	}
 
-	m_cnt = 0;
+	m_cnt = 0.0f;
 }

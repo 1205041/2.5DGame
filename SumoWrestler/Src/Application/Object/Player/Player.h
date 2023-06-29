@@ -19,10 +19,8 @@ public:
 
 	void SetCamera(const std::shared_ptr<CameraBase>& _camera) { m_wpCamera = _camera; }
 private:
-	void UpdateRotate(const Math::Vector3& _srcMoveVec);
-
 	std::weak_ptr<CameraBase> m_wpCamera;
 
-	// ワールド行列を作る為のそれぞれの回転角度
-	Math::Vector3	m_worldRot;
+	// 敵の押し出し
+	bool m_push = false;
 };

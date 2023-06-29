@@ -27,7 +27,7 @@ void WinScene::Event()
 void WinScene::Init()
 {
 	KdAudioManager::Instance().Play("Asset/Sounds/SE/GameSet.wav");
-	KdAudioManager::Instance().Play("Asset/Sounds/BGM/Result.wav", true);
+	KdAudioManager::Instance().Play("Asset/Sounds/BGM/Katidoki.wav", true);
 
 	/* オブジェクトの初期化 */
 	// シーン

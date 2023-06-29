@@ -45,11 +45,13 @@ void GameScene::Init()
 	spEnemy->SetPos({ 2.0f,-4.0f,0 });
 	
 	spPlayer->RegistHitObj(spGround);
-	spPlayer->RegistHitObj(spEnemy);
-	
 	spEnemy->RegistHitObj(spGround);
+
+	spPlayer->RegistHitObj(spEnemy);
 	spEnemy->RegistHitObj(spPlayer);
-	
+
+	spEnemy->SetPlayer(spPlayer);
+
 	m_objList.push_back(spPlayer);
 	m_objList.push_back(spEnemy);
 	

@@ -3,10 +3,12 @@
 void Tracking::Init()
 {
 	// 基準点(ターゲット)からどれだけ離れているか
-	transMat = Math::Matrix::CreateTranslation(0, 0, -1.5f);
-
+	transMat = Math::Matrix::CreateTranslation(0, 0.5f, -1.0f);
+	
 	// どれだけ傾けているか/* 順番はY,X,Z */
-	rotMat = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(0));
+	rotMat = Math::Matrix::CreateRotationX(DirectX::XMConvertToRadians(25));
+	
+	m_mWorld = rotMat * transMat;
 
 	CameraBase::Init();
 }

@@ -6,7 +6,7 @@ void WinText::PostUpdate()
 	scaleMat = Math::Matrix::CreateScale(10.0f, 8.0f, 10.0f);
 
 	// À•Ws—ñ
-	transMat = Math::Matrix::CreateTranslation({ 0,0,5.0f });
+	transMat = Math::Matrix::CreateTranslation({ 0,0,1.0f });
 
 	// s—ñ‡¬(‚r‚q‚s)
 	m_mWorld = scaleMat * transMat;

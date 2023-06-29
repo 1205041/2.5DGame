@@ -13,5 +13,5 @@ public:
 	void Init()			override;
 
 private:
-	int m_cnt = 0;
+	float m_cnt = 0.0f;
 };

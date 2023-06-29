@@ -5,8 +5,6 @@
 // 更新関数
 void Player::Update()
 {
-	m_spPoly->SetUVRect(Walk[(int)m_anime]);
-	
 	if (GetPos().y < -10) { m_isExpired = true; }
 	if (m_isExpired)
 	{
@@ -21,25 +19,22 @@ void Player::Update()
 	m_nowPos  = GetPos();
 
 	m_moveVec = Math::Vector3::Zero;
-	if (GetAsyncKeyState('D') & 0x8000) 
+	if (GetAsyncKeyState('D') & 0x8000) { m_moveVec.x = 1.0f; }
+	if (GetAsyncKeyState('A') & 0x8000) { m_moveVec.x = -1.0f; }
+	if (GetAsyncKeyState('W') & 0x8000) { m_moveVec.z = 1.0f; }
+	if (GetAsyncKeyState('S') & 0x8000) { m_moveVec.z = -1.0f; }
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
 	{
-		m_moveVec.x = 1.0f;
-		m_anime += 0.1f;
+		if (!m_push)
+		{
+			m_moveSpd = 0.1f;
+			m_push = true;
+		}
 	}
-	if (GetAsyncKeyState('A') & 0x8000) 
+	else
 	{
-		m_moveVec.x = -1.0f;
-		m_anime += 0.1f;
-	}
-	if (GetAsyncKeyState('W') & 0x8000) 
-	{
-		m_moveVec.z = 1.0f;
-		m_anime += 0.1f;
-	}
-	if (GetAsyncKeyState('S') & 0x8000) 
-	{ 
-		m_moveVec.z = -1.0f;
-		m_anime += 0.1f;
+		m_moveSpd = 0.05f;
+		m_push = false;
 	}
 
 	// カメラ情報
@@ -55,17 +50,15 @@ void Player::Update()
 
 	m_nowPos += m_moveVec;
 
-	UpdateRotate(m_moveVec);
-
+	m_spPoly->SetUVRect(Walk[(int)m_anime]);
+	m_anime += 0.1f;
 	if (m_anime >= 4) { m_anime = 0; }
 }
 
 // 更新後更新関数
 void Player::PostUpdate()
 {
-	// キャラクターのワールド行列を創る処理
-	Math::Matrix rotation = Math::Matrix::CreateRotationY(DirectX::XMConvertToRadians(m_worldRot.y));
-//	m_mWorld = rotation * Math::Matrix::CreateTranslation(m_nowPos);
+	// キャラの座標行列
 	m_mWorld = Math::Matrix::CreateTranslation(m_nowPos);
 	
 	UpdateCollision();
@@ -99,40 +92,8 @@ void Player::Init()
 	}
 
 	m_moveSpd = 0.05f;
+	m_push = false;
 
 	m_pCollider = std::make_unique<KdCollider>();
 	m_pCollider->RegisterCollisionShape("PlayerCollider", GetPos(), 0.25f, KdCollider::TypeBump);
-}
-
-void Player::UpdateRotate(const Math::Vector3& _srcMoveVec)
-{
-	// 何も入力が無い場合は処理しない
-	if (_srcMoveVec.LengthSquared() == 0.0f) { return; }
-
-	// 移動方向のベクトル
-	Math::Vector3 targetDir = _srcMoveVec;
-
-	// 今向いている矢印情報が手に入る
-	Math::Vector3 nowDir = GetMatrix().Backward();
-
-	targetDir.Normalize();
-	nowDir.Normalize();
-
-	// キャラの向いている角度
-	float nowAng = atan2(nowDir.x, nowDir.z);
-	nowAng = DirectX::XMConvertToDegrees(nowAng);
-
-	// 移動方向の角度
-	float targetAng = atan2(targetDir.x, targetDir.z);
-	targetAng = DirectX::XMConvertToDegrees(targetAng);
-
-	// targetAngとnowAngの間の角度
-	float betweenAng = targetAng - nowAng; // 差分を求める
-	// 補正
-	if (betweenAng > 180) { betweenAng -= 360; }
-	else if (betweenAng < -180) { betweenAng += 360; }
-
-	//
-	float rotateAng = std::clamp(betweenAng, -8.0f, 8.0f);
-	m_worldRot.y += rotateAng;
 }

@@ -17,8 +17,43 @@ void Enemy::Update()
 
 	// 追従移動
 	m_nowPos = GetPos();
-
 	m_moveVec = Math::Vector3::Zero;
+
+	if (!m_isExpired)
+	{
+		std::shared_ptr<Player> spPlayer = m_wpPlayer.lock();
+		if (spPlayer)
+		{
+			float targetDeg = GetAngleDeg(m_nowPos, spPlayer->GetPos());
+
+			float diffDeg = targetDeg - m_deg;
+
+			//0～359内に補正する
+			if (diffDeg < 0) { diffDeg += 360; }
+
+			//旋回方向を決める
+			if (diffDeg <= 179)
+			{
+				//角度差が179以下は左旋回(反時計回り)
+				m_deg += m_turnDeg;
+
+				//0～359内に補正する(360以上になっていないか？)
+				if (m_deg >= 360) { m_deg -= 360; }
+			}
+			else
+			{
+				//角度差が180以上は右旋回(時計回り)
+				m_deg -= m_turnDeg;
+
+				//0～359内に補正する(0未満になっていないか？)
+				if (m_deg < 0) { m_deg += 360; }
+			}
+
+			//移動量を再度求める
+			m_moveVec.x = cos(DirectX::XMConvertToRadians(m_deg)) * m_moveSpd;
+			m_moveVec.z = sin(DirectX::XMConvertToRadians(m_deg)) * m_moveSpd;
+		}
+	}
 	
 	m_moveVec.Normalize();
 	m_moveVec *= m_moveSpd;
@@ -33,10 +68,8 @@ void Enemy::Update()
 // 更新後更新関数
 void Enemy::PostUpdate()
 {
-	Math::Matrix transMat;
 	// キャラの座標行列
-	transMat = Math::Matrix::CreateTranslation(m_nowPos);
-	m_mWorld = transMat;
+	m_mWorld = Math::Matrix::CreateTranslation(m_nowPos);
 	
 	UpdateCollision();
 }
@@ -68,8 +101,7 @@ void Enemy::Init()
 		m_spPoly->SetSplit(4, 4);
 	}
 	
-	m_moveSpd = 0.05f;
-	m_moveVec = Math::Vector3::Zero;
+	m_moveSpd = 0.03f;
 
 	m_pCollider = std::make_unique<KdCollider>();
 	m_pCollider->RegisterCollisionShape("EnemyCollider", GetPos(), 0.25f, KdCollider::TypeBump);
